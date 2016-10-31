@@ -2,13 +2,22 @@ var orderMsg = function(msg_dict) {
   var out = [];
 
   for (var msg in msg_dict) {
-    var item = {};
-    item.image = msg_dict[msg]['image'];
-    item.timestamp = msg_dict[msg]['timestamp'];
-    item.message = msg_dict[msg]['message'];
-    item.sender = msg_dict[msg]['sender'];
 
-    out.push(item);
+    var currentTime = Date.now();
+    var futureTime = parseInt(msg_dict[msg]['timestampFuture']);
+
+    if (futureTime <= currentTime)
+    {
+      var item = {};
+      item.image = msg_dict[msg]['image'];
+      item.timestamp = msg_dict[msg]['timestamp'];
+      item.timestampFuture = msg_dict[msg]['timestampFuture'];
+      item.message = msg_dict[msg]['message'];
+      item.sender = msg_dict[msg]['sender'];
+
+      out.push(item);
+    }
+
   }
 
   return out.reverse();
@@ -27,7 +36,7 @@ angular
         messagingSenderId: "396973912921"
       };
 
-    $scope.user = '';
+    $scope.user = undefined;
     $scope.pass_hash = '';
     $scope.messages = undefined;
     $scope.test = undefined;
@@ -54,7 +63,7 @@ angular
 
     };
 
-    $scope.image = ""
+    $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
     $scope.caption = "";
     $scope.receiver = "";
 
@@ -62,16 +71,18 @@ angular
 
       var recv_acc = '/users/' + $scope.receiver + '/messages';
       var ref = database.ref().child(recv_acc);
+
       ref.push({
         'image': $scope.image,
         'message': $scope.caption,
         'sender': $scope.user,
-        'timestamp': Date.now()
+        'timestamp': Date.now(),
+        'timestampFuture': Date.now() + (60000 + 60000*Math.floor(Math.random()*4))
       });
 
       $scope.show_val = false;
 
-      $scope.image = "";
+      //$scope.image = '';
       $scope.caption = "";
       $scope.receiver = "";
     }
@@ -96,8 +107,8 @@ angular
 
     };
 
-    getUserMessages();
+    //getUserMessages();
 
-    $interval(getUserMessages, 5000);
+    $interval(getUserMessages, 1000);
 
   });

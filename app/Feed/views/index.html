@@ -5,6 +5,8 @@
     <super-navbar-title ng-bind = "user"></super-navbar-title>
     <super-navbar-button side='right' ng-click="showPost()">Post</super-nav-bar-button>
   </super-navbar>
+
+
   <div class="post" ng-show="show_val">
     <div class="list">
          <label class="item item-input item-floating-label">
@@ -12,8 +14,8 @@
            <input type="text" placeholder="Send to:" ng-model="receiver">
          </label>
          <label class="item item-input item-floating-label">
-           <span class="input-label">Image</span>
-           <input type="text" placeholder="Image URL" ng-model="image">
+           <span class="input-label">Image URL: </span>
+           <input type="text" placeholder="Image URL" ng-model="image"></input>
          </label>
          <label class="item item-input item-floating-label">
            <span class="input-label">Caption</span>
@@ -39,11 +41,20 @@
 
   <div class='list-group'>
     <div ng-repeat="message in messages" class="post">
-      <div class="col col-100 caption">From: {{message['sender']}}</div>
       <img ng-src={{message['image']}} width="100%" height="100%"/>
       <div class="row info-row">
         <div class="col text-right info">
-          {{message['timestamp'] | date:'MMM. d  h:m a'}}
+          From: {{message['sender']}}
+        </div>
+      </div>
+      <div class="row info-row">
+        <div class="col text-right info">
+          Sent: {{message['timestamp'] | date:'MMM. d  h:m a'}}
+        </div>
+      </div>
+      <div class="row info-row">
+        <div class="col text-right info">
+          Received: {{message['timestampFuture'] | date:'MMM. d  h:m a'}}
         </div>
       </div>
     	<div class="caption row">
@@ -53,9 +64,4 @@
     </div>
 
 
-
-
-    <!--button class="button button-full button-positive">
-      Create a new post (not functional)
-   </button>-->
 </div>
