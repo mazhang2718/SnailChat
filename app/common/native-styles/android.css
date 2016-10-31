@@ -60,8 +60,8 @@ tab-bar tab-bar-item marker-top:selected {
   background-color: #1596f7;
 }
 
-tab-bar-item#settings {
-  background-image: url(icons/cog.svg);
+tab-bar-item#Feed {
+  background-image: url(icons/home.svg);
 }
 
 tab-bar-item#index {

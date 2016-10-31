@@ -2,7 +2,7 @@
 
 module.exports =
   app:
-    name: "myProject"
+    name: "SnailChat"
 
   # steroidsAppId and steroidsApiKey headers are required by Supersonic Data
   # network:
