@@ -1,15 +1,6 @@
 var orderMsg = function(msg_dict) {
   var out = [];
 
-/*  
-{"-KVN9A7hlfWQvH-MzqHF":{"image":"http://i.imgur.com/mv9n9vX.jpg",
-"message":"This is a post","ordering":-1477874069715,"sender":
-"fahad","timestamp":1477874069715},"-KVNBvxREHmqUVycJbQd":
-{"image":"","message":"Anither post from me","ordering":-1477874793990,"sender":"fahad",
-"timestamp":1477874793990},"-KVNCIJquvsmPrRozbG8":{"image":"","message":
-"New post incoming","ordering":-1477874889697,"sender":"fahad","timestamp":1477874889697}}
-Feed#index  20:14:38.783  info  
-*/
   for (var msg in msg_dict) {
     var item = {};
     item.image = msg_dict[msg]['image'];
