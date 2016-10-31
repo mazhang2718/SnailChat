@@ -27,7 +27,7 @@ angular
         messagingSenderId: "396973912921"
       };
 
-    $scope.user = 'fahad';
+    $scope.user = '';
     $scope.pass_hash = '';
     $scope.messages = undefined;
     $scope.test = undefined;
@@ -79,6 +79,19 @@ angular
     $scope.showPost = function() {
 
       $scope.show_val = !$scope.show_val;
+      window.scrollTo(0, 0);
+
+    };
+
+    $scope.pushDataUser = function() {
+
+      $scope.show_val1 = false;
+
+    }
+
+    $scope.showUser = function() {
+
+      $scope.show_val1 = !$scope.show_val1;
       window.scrollTo(0, 0);
 
     };
