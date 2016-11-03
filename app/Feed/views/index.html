@@ -29,13 +29,17 @@
 
   <div class="post" ng-show="show_val1">
     <div class="list">
-         <label class="item item-input item-floating-label">
-           <span class="input-label"></span>
-           <input type="text" placeholder="Enter Username Here: " ng-model="user">
-         </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Username:</span>
+        <input type="text" placeholder="" ng-model="user">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Receive messages at {{currHour}}:{{delay}}</span>
+        <input type="number" placeholder="45" ng-model="delay">
+      </label>
     </div>
     <button class="button button-block button-positive" ng-click="pushDataUser()">
-     Submit
+     Save
     </button>
   </div>
 
@@ -49,12 +53,12 @@
       </div>
       <div class="row info-row">
         <div class="col text-right info">
-          Sent: {{message['timestamp'] | date:'MMM. d  h:m a'}}
+          Sent: {{message['timestamp'] | date:'MMM. d  h:mm a'}}
         </div>
       </div>
       <div class="row info-row">
         <div class="col text-right info">
-          Received: {{message['timestampFuture'] | date:'MMM. d  h:m a'}}
+          Receive time: {{message['timestampFuture'] | date:'MMM. d  h:mm a'}}
         </div>
       </div>
     	<div class="caption row">
