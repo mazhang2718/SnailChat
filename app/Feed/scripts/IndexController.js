@@ -65,14 +65,59 @@ angular
         messagingSenderId: "396973912921"
       };
 
+
     $scope.user = undefined;
     $scope.delay = 45;
+
+    $scope.publicIds = [];
+
+    // James' Cloudinary Account
+    // $.cloudinary.config({ cloud_name: 'ddwxpmknv', api_key: "834654812264824"});
+    // $('.upload_form').append($.cloudinary.unsigned_upload_tag("qx113r10",
+    //   { cloud_name: 'ddwxpmknv' }));
+
+    // Lenny's Cloudinary Account
+    $.cloudinary.config({cloud_name: "daxutqqyt"});
+    $('.upload_form').append($.cloudinary.unsigned_upload_tag("mmbawtto",
+      { cloud_name: 'daxutqqyt', tags: "browser_uploads"}))
+
+    .bind("cloudinarydone", function(e, data) {
+      $(".preview").append("<div id="+ data.result.public_id+"></div>");
+      $("#"+data.result.public_id).append($.cloudinary.image(data.result.public_id,
+        { format: data.result.format, version: data.result.version,
+          crop: "fill", width: 300, height: 300}))
+        .append("<button class="+data.result.public_id+">X</button>");
+
+      $scope.publicIds.push(data.result.public_id);
+      // supersonic.logger.log("public IDs: ");
+      // supersonic.logger.log($scope.publicIds);
+      $scope.image = "http://res.cloudinary.com/daxutqqyt/image/upload/v1478125497/" + $scope.publicIds.pop();
+      // supersonic.logger.log("image: ");
+      // supersonic.logger.log($scope.image);
+      $(".progress_bar").css("width", 0 + "%");
+      flag = true;
+      if (flag) {
+        $("#placeholder").css("display", "none");
+      }
+    })
+
+    .bind("cloudinaryprogress", function(e, data) {
+      $(".progress_bar").css("width",
+        Math.round((data.loaded * 100.0) / data.total) + "%");
+    });
+
+
+    $scope.user = '';
+
     $scope.pass_hash = '';
     $scope.messages = undefined;
     $scope.test = undefined;
     $scope.show_val = false;
+
+
     var date = new Date(Date.now());
     $scope.currHour = date.getHours();
+
     firebase.initializeApp(config);
     var database = firebase.database();
 
@@ -90,18 +135,22 @@ angular
       if (curr_min > $scope.delay)
         {$scope.currHour = ($scope.currHour + 1)%12;}
 
+
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
 
         $scope.messages = orderMsg(userinfo['messages'], $scope.delay);
         $scope.pass_hash = userinfo['password'];
+
         supersonic.logger.log($scope.messages);
         //supersonic.logger.log($scope.pass_hash);
       });
 
     };
 
+
     $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
+
     $scope.caption = "";
     $scope.receiver = "";
 
@@ -119,7 +168,8 @@ angular
 
       $scope.show_val = false;
 
-      //$scope.image = '';
+
+      $scope.image = "";
       $scope.caption = "";
       $scope.receiver = "";
     }
@@ -156,3 +206,4 @@ angular
     //$interval(updateTime, 30000);
 
   });
+
