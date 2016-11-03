@@ -40,7 +40,7 @@ var getLastDeliveryTime = function(delay_min) {
     new_date.setSeconds(0);
     var ret = parseInt((new_date.getTime()/1000).toFixed(0)) - 3600
   }
-  else 
+  else
   {
     //otherwise don't
     new_date.setMinutes(delay_min);
@@ -78,6 +78,10 @@ angular
 
     // Lenny's Cloudinary Account
     $.cloudinary.config({cloud_name: "daxutqqyt"});
+
+    // For Android
+    $(".cloudinary_fileupload").attr("accept", "image/*;capture=camera");
+
     $('.upload_form').append($.cloudinary.unsigned_upload_tag("mmbawtto",
       { cloud_name: 'daxutqqyt', tags: "browser_uploads"}))
 
@@ -127,7 +131,7 @@ angular
       var userinfo;
 
       //supersonic.logger.log(username);
-      
+
       //update current time
       var date = new Date(Date.now());
       var curr_min = date.getMinutes();
