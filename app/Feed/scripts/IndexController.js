@@ -40,7 +40,7 @@ var getLastDeliveryTime = function(delay_min) {
     new_date.setSeconds(0);
     var ret = parseInt((new_date.getTime()/1000).toFixed(0)) - 3600
   }
-  else 
+  else
   {
     //otherwise don't
     new_date.setMinutes(delay_min);
@@ -86,7 +86,7 @@ angular
       $("#"+data.result.public_id).append($.cloudinary.image(data.result.public_id,
         { format: data.result.format, version: data.result.version,
           crop: "fill", width: 300, height: 300}))
-        .append("<button class="+data.result.public_id+">X</button>");
+        // .append("<button class="+data.result.public_id+">X</button>");
 
       $scope.publicIds.push(data.result.public_id);
       // supersonic.logger.log("public IDs: ");
@@ -127,7 +127,7 @@ angular
       var userinfo;
 
       //supersonic.logger.log(username);
-      
+
       //update current time
       var date = new Date(Date.now());
       var curr_min = date.getMinutes();
