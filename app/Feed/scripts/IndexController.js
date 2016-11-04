@@ -90,7 +90,7 @@ angular
       $("#"+data.result.public_id).append($.cloudinary.image(data.result.public_id,
         { format: data.result.format, version: data.result.version,
           crop: "fill", width: 300, height: 300}))
-        .append("<button class="+data.result.public_id+">X</button>");
+        // .append("<button class="+data.result.public_id+">X</button>");
 
       $scope.publicIds.push(data.result.public_id);
       // supersonic.logger.log("public IDs: ");
@@ -137,7 +137,13 @@ angular
       var curr_min = date.getMinutes();
       $scope.currHour = date.getHours();
       if (curr_min > $scope.delay)
-        {$scope.currHour = ($scope.currHour + 1)%12;}
+      {
+        $scope.currHour = $scope.currHour + 1;
+      }
+      if ($scope.currHour > 12)
+      {
+        $scope.currHour = $scope.currHour - 12;
+      }
 
 
       database.ref(username).once('value').then(function(snapshot) {
@@ -206,8 +212,7 @@ angular
 
     };
 
-    $interval(getUserMessages, 3000);
+    $interval(getUserMessages, 1000);
     //$interval(updateTime, 30000);
 
   });
-
