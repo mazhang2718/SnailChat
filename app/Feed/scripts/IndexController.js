@@ -144,6 +144,10 @@ angular
       {
         $scope.currHour = $scope.currHour - 12;
       }
+      if ($scope.currHour == 0)
+      {
+        $scope.currHour = 12;
+      }
 
 
       database.ref(username).once('value').then(function(snapshot) {
