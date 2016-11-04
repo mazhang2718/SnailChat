@@ -187,6 +187,7 @@ angular
     $scope.showPost = function() {
 
       $scope.show_val = !$scope.show_val;
+      $scope.show_val1 = false;
       window.scrollTo(0, 0);
 
     };
@@ -208,6 +209,7 @@ angular
     $scope.showUser = function() {
 
       $scope.show_val1 = !$scope.show_val1;
+      $scope.show_val = false;
       window.scrollTo(0, 0);
 
     };
