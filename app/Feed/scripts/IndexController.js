@@ -117,13 +117,13 @@ angular
 
     $scope.pushData = function() {
 
-      var recv_acc = '/users/' + $scope.receiver + '/messages';
+      var recv_acc = '/users/' + $scope.receiver + '/messages/' + $scope.user;
       var ref = database.ref().child(recv_acc);
 
       ref.push({
         'image': $scope.image,
         'message': $scope.caption,
-        'sender': $scope.user,
+        // 'sender': $scope.user,
         'timestamp': Date.now()
       });
 
