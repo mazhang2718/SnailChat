@@ -186,6 +186,8 @@ angular
       $scope.image = "";
       $scope.caption = "";
       $scope.receiver = "";
+
+      $(".preview").empty();
     }
 
     $scope.showPost = function() {
