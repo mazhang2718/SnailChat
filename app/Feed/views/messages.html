@@ -3,6 +3,20 @@
     <super-navbar-title ng-bind="sender"></super-navbar-title>
   </super-navbar>
 
-  <h3>{{messages}}</h3>
+  <div class='list-group'>
+    <div ng-repeat="message in messages" class="post">
+      <img ng-src={{message['image']}} width="100%" height="100%"/>
+      <div class="row info-row">
+      </div>
+      <div class="row info-row">
+        <div class="col text-right info">
+          Sent: {{message['timestamp'] | date:'MMM. d  h:mm a'}}
+        </div>
+      </div>
+      <div class="caption row">
+        <div class="col col-100">{{message['message']}}</div>
+      </div>
+    </div>
+  </div>
 
 </div>

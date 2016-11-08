@@ -15,9 +15,7 @@ var orderMsg = function(msg_dict, delay_min) {
       var item = {};
       item.image = msg_dict[msg]['image'];
       item.timestamp = msg_dict[msg]['timestamp'];
-      item.timestampFuture = delivery_time*1000;
       item.message = msg_dict[msg]['message'];
-      item.sender = msg_dict[msg]['sender'];
 
       out.push(item);
     }
@@ -73,14 +71,6 @@ angular
     $scope.delay = undefined;
     $scope.user = undefined;
 
-    supersonic.ui.views.current.whenVisible( function(){
-      var clickParams = steroids.view.params.id;
-      var arr = clickParams.split(",");
-      $scope.user = arr[0]
-      $scope.sender = arr[1];
-      $scope.delay = arr[2];
-    });
-
     var getUserMessages = function() {
 
       var username = '/users/' + $scope.user + '/messages/' + $scope.sender;
@@ -95,6 +85,18 @@ angular
       });
 
     };
+
+    supersonic.ui.views.current.whenVisible( function(){
+      var clickParams = steroids.view.params.id;
+      var arr = clickParams.split(",");
+      $scope.user = arr[0]
+      $scope.sender = arr[1];
+      $scope.delay = arr[2];
+    });
+    
+    getUserMessages()
+
+
 
     $interval(getUserMessages, 1000);
 

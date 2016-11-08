@@ -72,7 +72,7 @@ angular
     firebase.initializeApp(config);
     var database = firebase.database();
 
-    var getUserMessages = function() {
+    var getSenders = function() {
 
       var username = '/users/' + $scope.user + '/messages/';
       var userinfo;
@@ -165,7 +165,7 @@ angular
 
     };
 
-    $interval(getUserMessages, 1000);
+    $interval(getSenders, 1000);
     //$interval(updateTime, 30000);
 
   });
