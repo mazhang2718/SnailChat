@@ -1,57 +1,3 @@
-var orderMsg = function(msg_dict, delay_min) {
-  var out = [];
-
-  for (var msg in msg_dict) {
-
-    //get last delivery time
-    //only push messages before that delivery time
-
-    var delivery_time = getLastDeliveryTime(delay_min);
-    var post_time = parseInt((msg_dict[msg]['timestamp']/1000).toFixed(0));
-    supersonic.logger.log(post_time);
-
-    if (post_time <= delivery_time)
-    {
-      var item = {};
-      item.image = msg_dict[msg]['image'];
-      item.timestamp = msg_dict[msg]['timestamp'];
-      item.timestampFuture = delivery_time*1000;
-      item.message = msg_dict[msg]['message'];
-      item.sender = msg_dict[msg]['sender'];
-
-      out.push(item);
-    }
-
-  }
-
-  return out.reverse();
-};
-
-var getLastDeliveryTime = function(delay_min) {
-  var date = new Date(Date.now());
-  var new_date = date;
-  var curr_min = date.getMinutes();
-  var ret = 0;
-
-  if (curr_min < delay_min)
-  {
-    //if not passed subtract an hour
-    new_date.setMinutes(delay_min);
-    new_date.setSeconds(0);
-    var ret = parseInt((new_date.getTime()/1000).toFixed(0)) - 3600
-  }
-  else
-  {
-    //otherwise don't
-    new_date.setMinutes(delay_min);
-    new_date.setSeconds(0);
-    var ret = parseInt((new_date.getTime()/1000).toFixed(0))
-  }
-
-  supersonic.logger.log(ret);
-  return ret;
-};
-
 angular
   .module('Feed')
   .controller('IndexController', function($scope, $interval, supersonic) {
@@ -116,6 +62,7 @@ angular
     $scope.pass_hash = '';
     $scope.messages = undefined;
     $scope.test = undefined;
+    $scope.senders = undefined;
     $scope.show_val = false;
 
 
@@ -127,8 +74,9 @@ angular
 
     var getUserMessages = function() {
 
-      var username = '/users/' + $scope.user;
+      var username = '/users/' + $scope.user + '/messages/';
       var userinfo;
+      supersonic.logger.log("hi");
 
       //supersonic.logger.log(username);
 
@@ -149,14 +97,13 @@ angular
         $scope.currHour = 12;
       }
 
-
+      //Get list of senders
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
 
-        $scope.messages = orderMsg(userinfo['messages'], $scope.delay);
-        $scope.pass_hash = userinfo['password'];
-
-        supersonic.logger.log($scope.messages);
+        $scope.senders = Object.keys(userinfo);
+        //$scope.pass_hash = userinfo['password'];
+        supersonic.logger.log($scope.senders);
         //supersonic.logger.log($scope.pass_hash);
       });
 

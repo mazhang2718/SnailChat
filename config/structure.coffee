@@ -7,7 +7,8 @@ module.exports =
     {
       title: "Feed"
       id: "Feed"
-      location: "Feed#index" # Supersonic module#view type navigation
+      location: "Feed#index" # Supersonic 
+      module#view type navigation
     }
   ]
 
@@ -15,6 +16,10 @@ module.exports =
   #   location: "Feed#index"
 
   preloads: [
+    {
+      id: "messages"
+      location: "Feed#messages"
+    }
   ]
 
   # drawers:

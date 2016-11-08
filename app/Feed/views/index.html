@@ -56,8 +56,13 @@
   </div>
 
   <div class='list-group'>
-    <div ng-repeat="message in messages" class="post">
-      <img ng-src={{message['image']}} width="100%" height="100%"/>
+    <div ng-repeat="sender in senders">
+      <super-navigate location="Feed#messages?id={{user}},{{sender}},{{delay}}">
+        <div class="row post text-center">
+          <h3> {{sender}} </h3>
+        </div>
+      </super-navigate>
+      <!--img ng-src={{message['image']}} width="100%" height="100%"/>
       <div class="row info-row">
         <div class="col text-right info">
           From: {{message['sender']}}
@@ -75,8 +80,8 @@
       </div>
     	<div class="caption row">
         <div class="col col-100">{{message['message']}}</div>
-      </div>
+      </div-->
     </div>
-    </div>
+  </div>
 
 </div>
