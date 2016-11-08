@@ -6,8 +6,8 @@
     <super-navbar-button side='right' ng-click="showPost()">Post</super-nav-bar-button>
   </super-navbar>
 
-
-  <div class="post" ng-show="show_val">
+<!-- posting form code -->
+  <div class="form" ng-show="show_val">
     <div class="list">
 
          <!-- Cloudinary Photo Upload-->
@@ -32,14 +32,14 @@
            <span class="input-label">Caption</span>
            <input type="text" placeholder="Caption" ng-model="caption">
          </label>
+        <button class="item button button-block button-positive" ng-click="pushData()">
+          Submit
+        </button>
     </div>
-    <button class="button button-block button-positive" ng-click="pushData()">
-     Submit
-    </button>
   </div>
 
-
-  <div class="post" ng-show="show_val1">
+<!-- user form code -->
+  <div class="form" ng-show="show_val1">
     <div class="list">
       <label class="item item-input item-stacked-label">
         <span class="input-label">Username:</span>
@@ -49,34 +49,28 @@
         <span class="input-label">Receive messages at {{currHour}}:{{delay}}</span>
         <input type="number" placeholder="45" ng-model="delay">
       </label>
-    </div>
-    <button class="button button-block button-positive" ng-click="pushDataUser()">
+      <button class="item button button-block button-positive" ng-click="pushDataUser()">
      Save
     </button>
+    </div>
   </div>
 
+<!-- Sender view code -->
+
   <div class='list-group'>
-    <div ng-repeat="message in messages" class="post">
-      <img ng-src={{message['image']}} width="100%" height="100%"/>
-      <div class="row info-row">
-        <div class="col text-right info">
-          From: {{message['sender']}}
+    <div ng-repeat="sender in senders">
+      <super-navigate location="Feed#messages?id={{user}},{{sender}},{{delay}}" class="item item-thumbnail-left">
+        <img src="/icons/email.svg">
+        <div class="row sender">
+          <div class="col"> 
+            {{sender}}
+          </div>  
+          <div class="col text-right">
+            >
+          </div>
         </div>
-      </div>
-      <div class="row info-row">
-        <div class="col text-right info">
-          Sent: {{message['timestamp'] | date:'MMM. d  h:mm a'}}
-        </div>
-      </div>
-      <div class="row info-row">
-        <div class="col text-right info">
-          Receive time: {{message['timestampFuture'] | date:'MMM. d  h:mm a'}}
-        </div>
-      </div>
-    	<div class="caption row">
-        <div class="col col-100">{{message['message']}}</div>
-      </div>
+      </super-navigate>
     </div>
-    </div>
+  </div>
 
 </div>

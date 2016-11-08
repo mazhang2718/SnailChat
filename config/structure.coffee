@@ -15,6 +15,10 @@ module.exports =
   #   location: "Feed#index"
 
   preloads: [
+    {
+      id: "messages"
+      location: "Feed#messages"
+    }
   ]
 
   # drawers:
