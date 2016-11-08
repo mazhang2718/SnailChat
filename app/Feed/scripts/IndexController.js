@@ -10,17 +10,17 @@ var orderMsg = function(msg_dict, delay_min) {
     var post_time = parseInt((msg_dict[msg]['timestamp']/1000).toFixed(0));
     supersonic.logger.log(post_time);
 
-    if (post_time <= delivery_time)
-    {
-      var item = {};
-      item.image = msg_dict[msg]['image'];
-      item.timestamp = msg_dict[msg]['timestamp'];
-      item.timestampFuture = delivery_time*1000;
-      item.message = msg_dict[msg]['message'];
-      item.sender = msg_dict[msg]['sender'];
+    // if (post_time <= delivery_time)
+    // {
+    //   var item = {};
+    //   item.image = msg_dict[msg]['image'];
+    //   item.timestamp = msg_dict[msg]['timestamp'];
+    //   item.timestampFuture = delivery_time*1000;
+    //   item.message = msg_dict[msg]['message'];
+    //   item.sender = msg_dict[msg]['sender'];
 
-      out.push(item);
-    }
+    //   out.push(item);
+    // }
 
   }
 
@@ -170,13 +170,13 @@ angular
 
     $scope.pushData = function() {
 
-      var recv_acc = '/users/' + $scope.receiver + '/messages';
+      var recv_acc = '/users/' + $scope.receiver + '/messages/' + $scope.user;
       var ref = database.ref().child(recv_acc);
 
       ref.push({
         'image': $scope.image,
         'message': $scope.caption,
-        'sender': $scope.user,
+        // 'sender': $scope.user,
         'timestamp': Date.now()
       });
 
