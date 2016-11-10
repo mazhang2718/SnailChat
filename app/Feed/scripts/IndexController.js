@@ -24,7 +24,7 @@ angular
   .module('Feed')
   .controller('IndexController', function($scope, $interval, $timeout, supersonic) {
     // Controller functionality here
-  	// Firebase Setting
+    // Firebase Setting
     var config = {
       apiKey: "AIzaSyDAuhBy07kgbtxrkWjHu76bS7-Rvsr2Oo8",
       authDomain: "purple-b06c8.firebaseapp.com",
@@ -35,7 +35,7 @@ angular
 
 
     $scope.user = undefined;
-    $scope.delay = 45;
+    $scope.delay = undefined;
 
     $scope.publicIds = [];
 
@@ -96,7 +96,7 @@ angular
 
     $scope.pending = false;
     $scope.delivered = false;
-    $scope.modalMessage = "No new updates ):";
+    $scope.alertMessage = "No new updates ):";
     $scope.triggerModal = false;
 
 
@@ -112,13 +112,11 @@ angular
     firebase.initializeApp(config);
     var database = firebase.database();
 
-    var getSenders = function() {
 
-      var username = '/users/' + $scope.user + '/messages/';
-      var userinfo;
-      // supersonic.logger.log("hi");
+var updateTime = function(){
 
-      //supersonic.logger.log(username);
+
+
 
 
       //update current time
@@ -135,10 +133,20 @@ angular
         $scope.currHour = 12;
       }
 
+
+}
+
+    var getSenders = function() {
+
+      updateTime();
+
+      var username = '/users/' + $scope.user + '/messages/';
+      var userinfo;
+
+
       //Get list of senders
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
-        // supersonic.logger.log(userinfo);
         $scope.senders = Object.keys(userinfo);
         if ($scope.icons == undefined) {
           $scope.icons = {};
@@ -147,15 +155,10 @@ angular
           }
         }
 
-        //$scope.pass_hash = userinfo['password'];
-        // supersonic.logger.log($scope.senders);
-        //supersonic.logger.log($scope.pass_hash);
 
       });
 
     };
-
-
 
 
     var unreadMail = function(sender) {
@@ -163,7 +166,30 @@ angular
       var query = '/users/' + $scope.user + '/messages/' + sender + '/';
       var messages;
 
-      supersonic.logger.log(deliveredMessages);
+
+
+      var userinfo;
+
+      // Get list of messages for sender
+      database.ref(query).once('value').then(function(snapshot) {
+        userinfo = snapshot.val();
+        // Update delivered tag of posts
+        var updates = {};
+        for (key in Object.keys(userinfo)) {
+          key = Object.keys(userinfo)[key];
+          var firebase_path = '/users/' + $scope.user + '/messages/' + sender + '/' + key + '/delivered/'
+          if (parseInt((userinfo[key]['timestamp'] / 1000).toFixed(0)) <= getLastDeliveryTime($scope.delay)) {
+            updates[firebase_path] = 1;
+          }
+          else{
+            updates[firebase_path] = 0;
+          }
+        }
+        database.ref().update(updates);
+      });
+
+
+
 
       database.ref(query).once('value').then(function(snapshot) {
         messages = snapshot.val();
@@ -214,7 +240,6 @@ angular
     };
 
     $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
-
     $scope.caption = '';
     $scope.receiver = '';
 
@@ -228,6 +253,7 @@ angular
         'message': $scope.caption,
         'timestamp': Date.now(),
         'read': 0,
+        'delivered': 0
       });
 
       $scope.show_val = false;
@@ -248,33 +274,29 @@ angular
 
     };
 
+    var showModals = false;
+    var pushedDelay = undefined;
+
     $scope.pushDataUser = function() {
 
+      showModals = false;
+
+
       $scope.show_val1 = false;
+
       if ($scope.delay < 1) {
         $scope.delay = 1;
       } else if ($scope.delay > 59) {
         $scope.delay = 59;
       }
 
-      var ref = database.ref("users/" + $scope.user + "/messages");
-      supersonic.logger.log("User found");
-      var flag = false;
-      ref.on("value", function(snapshot) {
-        // if (flag) {
-        //   $scope.show_alert = true;
-        // }
-        // flag = true;
-        // $timeout(function() {
-        //   $scope.show_alert = false;
-        // }, 3000);
+      pushedDelay = $scope.delay;
 
-        $scope.modalMessage = "A message has been sent to you!";
-        $("#myModal").modal();
+      updateModals();
 
-      });
-
-      showModal();
+       $timeout(function() {
+           showModals = true;
+        }, 2000);
 
     }
 
@@ -286,39 +308,67 @@ angular
 
     };
 
-    var showModal = function() {
 
-      if ($scope.delivered == true){
-        $scope.modalMessage = "New messages have been delivered for you!";
-        $("#myModal").modal();
-      }
-      else if ($scope.pending == true){
-        $scope.modalMessage = "New messages are being sent to you!";
-        $("#myModal").modal();
-      }
+
+    var updateModals = function(){
+
+
+        var ref = database.ref("users/" + $scope.user + "/messages");
+        
+        ref.on("value", function(snapshot){
+
+          var allUsers = snapshot.val();
+
+          var users = Object.keys(allUsers);
+
+          var msg;
+          var msgs;
+          var user;
+
+          for (var i = 0; i<users.length; i++){
+
+            user = users[i];
+            msgs = Object.keys(allUsers[user]);
+
+              for (var j = 0; j<msgs.length; j++) {
+                msg = allUsers[user][msgs[j]];
+                if (msg['delivered'] == 1 && msg['read'] == 0 && showModals && pushedDelay == $scope.delay) {
+                  $scope.modalMessage = "New messages have been delivered for you!";
+                  $("#myModal").modal();
+                  return;
+                }
+                else if (msg['delivered'] == 0 && msg['read'] == 0 && showModals && pushedDelay == $scope.delay){
+                  $scope.modalMessage = "New messages are being sent to you!";
+                  $("#myModal").modal();
+                  return;
+                }
+              }
+           }
+
+        });
 
     }
+
+    
 
     var updateMessage = function(){
 
       if ($scope.delivered == true){
-        $scope.modalMessage = "New messages have been delivered for you!";
+        $scope.alertMessage = "New messages have been delivered for you!";
         deliveredMessages = 0;
       }
       else if ($scope.pending == true){
-        $scope.modalMessage = "New messages are being sent to you!";
+        $scope.alertMessage = "New messages are being sent to you!";
         pendingMessages = 0;
       }
       else{
-        $scope.modalMessage = "No new updates ):"
+        $scope.alertMessage = "No new updates ):"
       }
 
     }
 
+
     $interval(getSenders, 1000);
     $interval(updateMailIcons, 1000);
-
-    showModal();
-
 
   });

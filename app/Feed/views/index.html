@@ -10,7 +10,7 @@
   <!-- Alert Popup-->
   <div class="alert" ng-show="show_alert">Someone sent you a message!</div>
 
-  <div class="notifications">{{modalMessage}}</div>
+  <div class="notifications">{{alertMessage}}</div>
 
 <!-- posting form code -->
   <div class="form" ng-show="show_val">
@@ -53,7 +53,7 @@
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Receive messages at {{currHour}}:{{delay}}</span>
-        <input type="number" placeholder="45" ng-model="delay">
+        <input type="number" placeholder="" ng-model="delay">
       </label>
       <button class="item button button-block button-positive" ng-click="pushDataUser()">
      Save
