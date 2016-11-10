@@ -21,6 +21,11 @@ module.exports =
     }
   ]
 
+  initialView:
+    id: "initialView"
+    location: "Feed#login"
+
+
   # drawers:
   #   left:
   #     id: "leftDrawer"
@@ -29,6 +34,4 @@ module.exports =
   #   options:
   #     animation: "swingingDoor"
   #
-  # initialView:
-  #   id: "initialView"
-  #   location: "example#initial-view"
+
