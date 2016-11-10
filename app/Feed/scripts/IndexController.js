@@ -255,13 +255,11 @@ angular
     var showModal = function() {
 
       if ($scope.delivered == true){
-        $scope.delivered = false;
         $scope.modalMessage = "Messages have been delivered to you!";
         $("#myModal").modal();
 
       }
       else if ($scope.pending == true){
-        $scope.pending = false;
         $scope.modalMessage = "Messages are pending for you!";
         $("#myModal").modal();
 
@@ -272,10 +270,13 @@ angular
     var updateMessage = function(){
 
       if ($scope.delivered == true){
-        $scope.modalMessage = "Messages have been delivered to you!";
+        $scope.modalMessage = "New messages have been delivered for you!";
       }
       else if ($scope.pending == true){
-        $scope.modalMessage = "Messages are pending for you!";
+        $scope.modalMessage = "New messages are being sent to you!";
+      }
+      else{
+        $scope.modalMessage = "No new updates ):"
       }
 
     }
