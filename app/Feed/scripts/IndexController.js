@@ -159,12 +159,12 @@ angular
 
         for (var message in messages) {
           message = messages[message];
-          if ((getLastDeliveryTime($scope.delay) <= message.timestamp && message['read'] === 0)) {
+          if ((getLastDeliveryTime($scope.delay) > message.timestamp/1000 && message['read'] === 0)) {
             $scope.icons[sender] = '/icons/email.svg';
             $scope.delivered = true;
             return;
           }
-          else if ((getLastDeliveryTime($scope.delay) <= message.timestamp && message['read'] === 0)){
+          else if ((getLastDeliveryTime($scope.delay) <= message.timestamp/1000 && message['read'] === 0)){
             $scope.pending = true;
           }
         }
@@ -255,12 +255,12 @@ angular
     var showModal = function() {
 
       if ($scope.delivered == true){
-        $scope.modalMessage = "Messages have been delivered to you!";
+        $scope.modalMessage = "New messages have been delivered for you!";
         $("#myModal").modal();
 
       }
       else if ($scope.pending == true){
-        $scope.modalMessage = "Messages are pending for you!";
+        $scope.modalMessage = "New messages are being sent to you!";
         $("#myModal").modal();
 
       }

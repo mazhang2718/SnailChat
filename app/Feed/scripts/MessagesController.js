@@ -9,15 +9,15 @@ var orderMsg = function(msg_dict, delay_min) {
     var post_time = parseInt((msg_dict[msg]['timestamp']/1000).toFixed(0));
 
 
-    // if (post_time <= delivery_time)
-    // {
+     if (post_time <= delivery_time)
+     {
       var item = {};
       item.image = msg_dict[msg]['image'];
       item.timestamp = msg_dict[msg]['timestamp'];
       item.message = msg_dict[msg]['message'];
 
       out.push(item);
-    // }
+     }
 
   }
 
