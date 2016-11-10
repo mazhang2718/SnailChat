@@ -83,7 +83,7 @@ angular
     });
 
 
-    $scope.user = 'Fahad';
+    $scope.user = "";
 
     $scope.pass_hash = '';
     $scope.messages = undefined;
