@@ -162,6 +162,7 @@ angular
           if ((getLastDeliveryTime($scope.delay) > message.timestamp/1000 && message['read'] === 0)) {
             $scope.icons[sender] = '/icons/email.svg';
             $scope.delivered = true;
+            $scope.pending = false;
             return;
           }
           else if ((getLastDeliveryTime($scope.delay) <= message.timestamp/1000 && message['read'] === 0)){
