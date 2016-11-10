@@ -195,9 +195,6 @@ angular
       }
 
 
-
-
-
       if (pendingMessages > 0){
         $scope.pending = true;
       }
@@ -294,12 +291,10 @@ angular
       if ($scope.delivered == true){
         $scope.modalMessage = "New messages have been delivered for you!";
         $("#myModal").modal();
-
       }
       else if ($scope.pending == true){
         $scope.modalMessage = "New messages are being sent to you!";
         $("#myModal").modal();
-
       }
 
     }
@@ -308,9 +303,11 @@ angular
 
       if ($scope.delivered == true){
         $scope.modalMessage = "New messages have been delivered for you!";
+        deliveredMessages = 0;
       }
       else if ($scope.pending == true){
         $scope.modalMessage = "New messages are being sent to you!";
+        pendingMessages = 0;
       }
       else{
         $scope.modalMessage = "No new updates ):"
