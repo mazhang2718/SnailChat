@@ -84,10 +84,11 @@ angular
         var updates = {};
         for (key in Object.keys(userinfo)) {
           key = Object.keys(userinfo)[key];
-          supersonic.logger.log("key: " + key);
-          var firebase_path = '/users/' + $scope.user + '/messages/' + $scope.sender + '/' + key + '/read/'
-          updates[firebase_path] = 1
-
+          if (parseInt((userinfo[key]['timestamp'] / 1000).toFixed(0)) <= getLastDeliveryTime($scope.delay)) {
+            supersonic.logger.log("key: " + key);
+            var firebase_path = '/users/' + $scope.user + '/messages/' + $scope.sender + '/' + key + '/read/'
+            updates[firebase_path] = 1;
+          }
         }
         database.ref().update(updates);
       });
