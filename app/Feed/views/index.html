@@ -6,8 +6,11 @@
     <super-navbar-button side='right' ng-click="showPost()">Post</super-nav-bar-button>
   </super-navbar>
 
+
   <!-- Alert Popup-->
   <div class="alert" ng-show="show_alert">Someone sent you a message!</div>
+
+  <div class="notifications">{{modalMessage}}</div>
 
 <!-- posting form code -->
   <div class="form" ng-show="show_val">
@@ -76,4 +79,32 @@
     </div>
   </div>
 
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">SnailChat</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{modalMessage}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 </div>
+
+
+<script>
+
+
+
+</script>

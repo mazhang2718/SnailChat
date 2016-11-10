@@ -94,6 +94,12 @@ angular
     $scope.show_alert = false;
 
 
+    $scope.pending = false;
+    $scope.delivered = false;
+    $scope.modalMessage = "No new updates ):";
+    $scope.triggerModal = false;
+
+
     var date = new Date(Date.now());
     $scope.currHour = date.getHours();
 
@@ -153,11 +159,16 @@ angular
 
         for (var message in messages) {
           message = messages[message];
-          if ((getLastDeliveryTime($scope.delay) <= message.timestamp && message['read'] === 0)) {
+          if ((getLastDeliveryTime($scope.delay) > message.timestamp/1000 && message['read'] === 0)) {
             $scope.icons[sender] = '/icons/email.svg';
+            $scope.delivered = true;
             return;
           }
+          else if ((getLastDeliveryTime($scope.delay) <= message.timestamp/1000 && message['read'] === 0)){
+            $scope.pending = true;
+          }
         }
+        $scope.delivered = false;
         $scope.icons[sender] = '/icons/email_open.svg';
       });
     };
@@ -166,7 +177,11 @@ angular
       for (var sender in $scope.senders) {
         sender = $scope.senders[sender];
         unreadMail(sender);
+
       }
+
+      updateMessage();
+
     };
 
     $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
@@ -225,6 +240,8 @@ angular
 
       });
 
+      showModal();
+
     }
 
     $scope.showUser = function() {
@@ -235,7 +252,39 @@ angular
 
     };
 
+    var showModal = function() {
+
+      if ($scope.delivered == true){
+        $scope.modalMessage = "New messages have been delivered for you!";
+        $("#myModal").modal();
+
+      }
+      else if ($scope.pending == true){
+        $scope.modalMessage = "New messages are being sent to you!";
+        $("#myModal").modal();
+
+      }
+
+    }
+
+    var updateMessage = function(){
+
+      if ($scope.delivered == true){
+        $scope.modalMessage = "New messages have been delivered for you!";
+      }
+      else if ($scope.pending == true){
+        $scope.modalMessage = "New messages are being sent to you!";
+      }
+      else{
+        $scope.modalMessage = "No new updates ):"
+      }
+
+    }
+
     $interval(getSenders, 1000);
     $interval(updateMailIcons, 1000);
+
+    showModal();
+
 
   });
