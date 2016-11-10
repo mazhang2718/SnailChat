@@ -264,11 +264,16 @@ angular
       supersonic.logger.log("User found");
       var flag = false;
       ref.on("value", function(snapshot) {
-        if (flag) $scope.show_alert = true;
-        flag = true;
-        $timeout(function() {
-          $scope.show_alert = false;
-        }, 3000);
+        // if (flag) {
+        //   $scope.show_alert = true;
+        // }
+        // flag = true;
+        // $timeout(function() {
+        //   $scope.show_alert = false;
+        // }, 3000);
+
+        $scope.modalMessage = "A message has been sent to you!";
+        $("#myModal").modal();
 
       });
 
