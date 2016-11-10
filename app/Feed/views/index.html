@@ -60,11 +60,11 @@
   <div class='list-group'>
     <div ng-repeat="sender in senders">
       <super-navigate location="Feed#messages?id={{user}},{{sender}},{{delay}}" class="item item-thumbnail-left">
-        <img src="/icons/email.svg">
+        <img ng-src={{icons[sender]}}>
         <div class="row sender">
-          <div class="col"> 
+          <div class="col">
             {{sender}}
-          </div>  
+          </div>
           <div class="col text-right">
             >
           </div>
