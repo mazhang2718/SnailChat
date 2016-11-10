@@ -159,8 +159,10 @@ angular
 
       var ref = database.ref("users/" + $scope.user + "/messages");
       supersonic.logger.log("User found");
+      var flag = false;
       ref.on("value", function(snapshot) {
-        $scope.show_alert = true;
+        if (flag) $scope.show_alert = true;
+        flag = true;
         $timeout(function() {
           $scope.show_alert = false;
         }, 3000);
@@ -177,8 +179,7 @@ angular
 
     };
 
-    // $interval(getSenders, 1000);
-    // $interval(test, 2000);
+    $interval(getSenders, 1000);
     //$interval(updateTime, 30000);
 
   });
