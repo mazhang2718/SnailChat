@@ -100,6 +100,12 @@ angular
     $scope.triggerModal = false;
 
 
+    var pendingMessages = 0;
+    var deliveredMessages = 0;
+
+
+
+
     var date = new Date(Date.now());
     $scope.currHour = date.getHours();
 
@@ -149,10 +155,15 @@ angular
 
     };
 
+
+
+
     var unreadMail = function(sender) {
 
       var query = '/users/' + $scope.user + '/messages/' + sender + '/';
       var messages;
+
+      supersonic.logger.log(deliveredMessages);
 
       database.ref(query).once('value').then(function(snapshot) {
         messages = snapshot.val();
@@ -161,24 +172,44 @@ angular
           message = messages[message];
           if ((getLastDeliveryTime($scope.delay) > message.timestamp/1000 && message['read'] === 0)) {
             $scope.icons[sender] = '/icons/email.svg';
-            $scope.delivered = true;
-            $scope.pending = false;
+            deliveredMessages += 1;
             return;
           }
           else if ((getLastDeliveryTime($scope.delay) <= message.timestamp/1000 && message['read'] === 0)){
-            $scope.pending = true;
+            pendingMessages += 1;
           }
         }
-        $scope.delivered = false;
         $scope.icons[sender] = '/icons/email_open.svg';
       });
     };
 
     var updateMailIcons = function() {
+
+      //pendingMessages = 0;
+      //deliveredMessages = 0;
+
       for (var sender in $scope.senders) {
         sender = $scope.senders[sender];
         unreadMail(sender);
 
+      }
+
+
+
+
+
+      if (pendingMessages > 0){
+        $scope.pending = true;
+      }
+      else{
+        $scope.pending = false;
+      }
+
+      if (deliveredMessages > 0){
+        $scope.delivered = true;
+      }
+      else{
+        $scope.delivered = false;
       }
 
       updateMessage();
