@@ -5,10 +5,9 @@ var orderMsg = function(msg_dict, delay_min) {
 
     //get last delivery time
     //only push messages before that delivery time
-
     var delivery_time = getLastDeliveryTime(delay_min);
     var post_time = parseInt((msg_dict[msg]['timestamp']/1000).toFixed(0));
-    supersonic.logger.log(post_time);
+
 
     // if (post_time <= delivery_time)
     // {
@@ -46,14 +45,14 @@ var getLastDeliveryTime = function(delay_min) {
     var ret = parseInt((new_date.getTime()/1000).toFixed(0))
   }
 
-  supersonic.logger.log(ret);
+  //supersonic.logger.log(ret);
   return ret;
 };
 
 angular
   .module('Feed')
   .controller('MessagesController', function($scope, $interval, supersonic) {
-    // Controller functionality here
+
   	// Firebase Setting
     var config = {
         apiKey: "AIzaSyDAuhBy07kgbtxrkWjHu76bS7-Rvsr2Oo8",
@@ -76,12 +75,21 @@ angular
       var username = '/users/' + $scope.user + '/messages/' + $scope.sender;
       var userinfo;
 
-      //Get list of messages for sender
+      // Get list of messages for sender
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
         //$scope.messages = userinfo;
         $scope.messages = orderMsg(userinfo, $scope.delay);
+        // Update read tag of posts
+        var updates = {};
+        for (key in Object.keys(userinfo)) {
+          key = Object.keys(userinfo)[key];
+          supersonic.logger.log("key: " + key);
+          var firebase_path = '/users/' + $scope.user + '/messages/' + $scope.sender + '/' + key + '/read/'
+          updates[firebase_path] = 1
 
+        }
+        database.ref().update(updates);
       });
 
     };

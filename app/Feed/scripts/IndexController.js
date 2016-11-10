@@ -1,15 +1,37 @@
+var getLastDeliveryTime = function(delay_min) {
+  var date = new Date(Date.now());
+  var new_date = date;
+  var curr_min = date.getMinutes();
+  var ret = 0;
+
+  if (curr_min < delay_min) {
+    //if not passed subtract an hour
+    new_date.setMinutes(delay_min);
+    new_date.setSeconds(0);
+    var ret = parseInt((new_date.getTime() / 1000).toFixed(0)) - 3600
+  } else {
+    //otherwise don't
+    new_date.setMinutes(delay_min);
+    new_date.setSeconds(0);
+    var ret = parseInt((new_date.getTime() / 1000).toFixed(0))
+  }
+
+  return ret;
+};
+
+
 angular
   .module('Feed')
   .controller('IndexController', function($scope, $interval, $timeout, supersonic) {
     // Controller functionality here
   	// Firebase Setting
     var config = {
-        apiKey: "AIzaSyDAuhBy07kgbtxrkWjHu76bS7-Rvsr2Oo8",
-        authDomain: "purple-b06c8.firebaseapp.com",
-        databaseURL: "https://purple-b06c8.firebaseio.com",
-        storageBucket: "purple-b06c8.appspot.com",
-        messagingSenderId: "396973912921"
-      };
+      apiKey: "AIzaSyDAuhBy07kgbtxrkWjHu76bS7-Rvsr2Oo8",
+      authDomain: "purple-b06c8.firebaseapp.com",
+      databaseURL: "https://purple-b06c8.firebaseio.com",
+      storageBucket: "purple-b06c8.appspot.com",
+      messagingSenderId: "396973912921"
+    };
 
 
     $scope.user = undefined;
@@ -23,27 +45,31 @@ angular
     //   { cloud_name: 'ddwxpmknv' }));
 
     // Lenny's Cloudinary Account
-    $.cloudinary.config({cloud_name: "daxutqqyt"});
+    $.cloudinary.config({
+      cloud_name: "daxutqqyt"
+    });
 
     // For Android
     $(".cloudinary_fileupload").attr("accept", "image/*;capture=camera");
 
-    $('.upload_form').append($.cloudinary.unsigned_upload_tag("mmbawtto",
-      { cloud_name: 'daxutqqyt', tags: "browser_uploads"}))
+    $('.upload_form').append($.cloudinary.unsigned_upload_tag("mmbawtto", {
+      cloud_name: 'daxutqqyt',
+      tags: "browser_uploads"
+    }))
 
     .bind("cloudinarydone", function(e, data) {
-      $(".preview").append("<div id="+ data.result.public_id+"></div>");
-      $("#"+data.result.public_id).append($.cloudinary.image(data.result.public_id,
-        { format: data.result.format, version: data.result.version,
-          crop: "fill", width: 300, height: 300}))
+      $(".preview").append("<div id=" + data.result.public_id + "></div>");
+      $("#" + data.result.public_id).append($.cloudinary.image(data.result.public_id, {
+          format: data.result.format,
+          version: data.result.version,
+          crop: "fill",
+          width: 300,
+          height: 300
+        }))
         // .append("<button class="+data.result.public_id+">X</button>");
 
       $scope.publicIds.push(data.result.public_id);
-      // supersonic.logger.log("public IDs: ");
-      // supersonic.logger.log($scope.publicIds);
       $scope.image = "http://res.cloudinary.com/daxutqqyt/image/upload/v1478125497/" + $scope.publicIds.pop();
-      // supersonic.logger.log("image: ");
-      // supersonic.logger.log($scope.image);
       $(".progress_bar").css("width", 0 + "%");
       flag = true;
       if (flag) {
@@ -57,12 +83,13 @@ angular
     });
 
 
-    $scope.user = '';
+    $scope.user = 'Fahad';
 
     $scope.pass_hash = '';
     $scope.messages = undefined;
     $scope.test = undefined;
     $scope.senders = undefined;
+    $scope.icons = undefined;
     $scope.show_val = false;
     $scope.show_alert = false;
 
@@ -81,20 +108,18 @@ angular
 
       //supersonic.logger.log(username);
 
+
       //update current time
       var date = new Date(Date.now());
       var curr_min = date.getMinutes();
       $scope.currHour = date.getHours();
-      if (curr_min > $scope.delay)
-      {
+      if (curr_min > $scope.delay) {
         $scope.currHour = $scope.currHour + 1;
       }
-      if ($scope.currHour > 12)
-      {
+      if ($scope.currHour > 12) {
         $scope.currHour = $scope.currHour - 12;
       }
-      if ($scope.currHour == 0)
-      {
+      if ($scope.currHour == 0) {
         $scope.currHour = 12;
       }
 
@@ -103,17 +128,51 @@ angular
         userinfo = snapshot.val();
         // supersonic.logger.log(userinfo);
         $scope.senders = Object.keys(userinfo);
+        if ($scope.icons == undefined) {
+          $scope.icons = {};
+          for (var sender in $scope.senders) {
+            $scope.icons[$scope.senders[sender]] = '/icons/email_open.svg';
+          }
+        }
+
         //$scope.pass_hash = userinfo['password'];
         // supersonic.logger.log($scope.senders);
         //supersonic.logger.log($scope.pass_hash);
+
       });
 
     };
 
+    var unreadMail = function(sender) {
+
+      var query = '/users/' + $scope.user + '/messages/' + sender + '/';
+      var messages;
+
+      database.ref(query).once('value').then(function(snapshot) {
+        messages = snapshot.val();
+
+        for (var message in messages) {
+          message = messages[message];
+          if ((getLastDeliveryTime($scope.delay) <= message.timestamp && message['read'] === 0)) {
+            $scope.icons[sender] = '/icons/email.svg';
+            return;
+          }
+        }
+        $scope.icons[sender] = '/icons/email_open.svg';
+      });
+    };
+
+    var updateMailIcons = function() {
+      for (var sender in $scope.senders) {
+        sender = $scope.senders[sender];
+        unreadMail(sender);
+      }
+    };
+
     $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
 
-    $scope.caption = "";
-    $scope.receiver = "";
+    $scope.caption = '';
+    $scope.receiver = '';
 
     $scope.pushData = function() {
 
@@ -123,8 +182,8 @@ angular
       ref.push({
         'image': $scope.image,
         'message': $scope.caption,
-        // 'sender': $scope.user,
-        'timestamp': Date.now()
+        'timestamp': Date.now(),
+        'read': 0,
       });
 
       $scope.show_val = false;
@@ -148,12 +207,9 @@ angular
     $scope.pushDataUser = function() {
 
       $scope.show_val1 = false;
-      if ($scope.delay < 1)
-      {
+      if ($scope.delay < 1) {
         $scope.delay = 1;
-      }
-      else if ($scope.delay > 59)
-      {
+      } else if ($scope.delay > 59) {
         $scope.delay = 59;
       }
 
@@ -180,6 +236,6 @@ angular
     };
 
     $interval(getSenders, 1000);
-    //$interval(updateTime, 30000);
+    $interval(updateMailIcons, 1000);
 
   });
