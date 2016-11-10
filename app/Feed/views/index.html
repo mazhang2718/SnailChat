@@ -6,6 +6,9 @@
     <super-navbar-button side='right' ng-click="showPost()">Post</super-nav-bar-button>
   </super-navbar>
 
+  <!-- Alert Popup-->
+  <div class="alert" ng-show="show_alert">Someone sent you a message!</div>
+
 <!-- posting form code -->
   <div class="form" ng-show="show_val">
     <div class="list">
@@ -62,9 +65,9 @@
       <super-navigate location="Feed#messages?id={{user}},{{sender}},{{delay}}" class="item item-thumbnail-left">
         <img src="/icons/email.svg">
         <div class="row sender">
-          <div class="col"> 
+          <div class="col">
             {{sender}}
-          </div>  
+          </div>
           <div class="col text-right">
             >
           </div>

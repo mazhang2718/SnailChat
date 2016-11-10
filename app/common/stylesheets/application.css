@@ -42,3 +42,8 @@
 .content {
 	padding: 5%;
 }
+
+.alert {
+  background-color: yellow;
+  text-align: center;
+}

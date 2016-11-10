@@ -1,6 +1,6 @@
 angular
   .module('Feed')
-  .controller('IndexController', function($scope, $interval, supersonic) {
+  .controller('IndexController', function($scope, $interval, $timeout, supersonic) {
     // Controller functionality here
   	// Firebase Setting
     var config = {
@@ -64,6 +64,7 @@ angular
     $scope.test = undefined;
     $scope.senders = undefined;
     $scope.show_val = false;
+    $scope.show_alert = false;
 
 
     var date = new Date(Date.now());
@@ -76,7 +77,7 @@ angular
 
       var username = '/users/' + $scope.user + '/messages/';
       var userinfo;
-      supersonic.logger.log("hi");
+      // supersonic.logger.log("hi");
 
       //supersonic.logger.log(username);
 
@@ -100,15 +101,14 @@ angular
       //Get list of senders
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
-
+        // supersonic.logger.log(userinfo);
         $scope.senders = Object.keys(userinfo);
         //$scope.pass_hash = userinfo['password'];
-        supersonic.logger.log($scope.senders);
+        // supersonic.logger.log($scope.senders);
         //supersonic.logger.log($scope.pass_hash);
       });
 
     };
-
 
     $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
 
@@ -157,6 +157,16 @@ angular
         $scope.delay = 59;
       }
 
+      var ref = database.ref("users/" + $scope.user + "/messages");
+      supersonic.logger.log("User found");
+      ref.on("value", function(snapshot) {
+        $scope.show_alert = true;
+        $timeout(function() {
+          $scope.show_alert = false;
+        }, 3000);
+
+      });
+
     }
 
     $scope.showUser = function() {
@@ -167,7 +177,8 @@ angular
 
     };
 
-    $interval(getSenders, 1000);
+    // $interval(getSenders, 1000);
+    // $interval(test, 2000);
     //$interval(updateTime, 30000);
 
   });
