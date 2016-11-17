@@ -6,6 +6,7 @@ angular
 
     $scope.newUser = undefined;
     $scope.newPass = undefined;
+    $scope.newPass2 = undefined;
     $scope.ph = undefined;
     $scope.pph = undefined;
     $scope.cond = undefined;
@@ -21,8 +22,8 @@ angular
     firebase.initializeApp(config);
     var database = firebase.database();
 
-    var userList;
-    var newPassHash;
+    var userList = undefined;
+    var newPassHash = undefined;
 
     database.ref('/users').once('value').then(function(snapshot) {
         userList = snapshot.val();
@@ -44,6 +45,17 @@ angular
         }
       }
 
+      if($scope.newPass == undefined || $scope.newPass2 == undefined){
+        $scope.cond = "You must type in your new password twice!";
+        return;
+      }
+
+      if($scope.newPass != $scope.newPass2){
+        $scope.cond = "Your re-typed password doesn't match!";
+        return;
+      }
+
+
       newPassHash = $scope.newPass.hashCode();
   
 
@@ -55,7 +67,11 @@ angular
 
       $scope.cond = 'Success!';
 
-      //$window.location.assign('Feed#login');
+      localStorage.setItem('snail_usr', $scope.newUser);
+
+
+      steroids.initialView.dismiss();
+      supersonic.ui.layers.pop();
 
     }
     
