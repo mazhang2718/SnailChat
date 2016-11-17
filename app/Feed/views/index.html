@@ -3,7 +3,6 @@
   <super-navbar>
     <super-navbar-button side='left' ng-click="showUser()">User</super-navbar-button>
     <super-navbar-title ng-bind = "user"></super-navbar-title>
-    <super-navbar-button side='right' ng-click="showPost()">Post</super-nav-bar-button>
   </super-navbar>
 
 
@@ -12,37 +11,6 @@
 
   <div class="notifications">{{alertMessage}}</div>
 
-<!-- posting form code -->
-  <div class="form" ng-show="show_val">
-    <div class="list">
-
-         <!-- Cloudinary Photo Upload-->
-         <div class="preview">
-            <img id="placeholder" height="300" width="300" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" />
-         </div> <br />
-         <!-- <img id="AddPhotos" src="http://www.clker.com/cliparts/A/P/L/b/V/G/blue-plus-sign-md.png" width="50" height="50" /> -->
-         <form class="upload_form"></form>
-         <div class="progress_bar"></div>
-
-         <label class="item item-input item-floating-label">
-           <span class="input-label">Send to:</span>
-           <input type="text" placeholder="Send to:" ng-model="receiver">
-         </label>
-<!--          <label class="item item-input item-floating-label">
-
-           <span class="input-label">Image URL: </span>
-           <input type="text" placeholder="Image URL" ng-model="image"></input>
-
-         </label> -->
-         <label class="item item-input item-floating-label">
-           <span class="input-label">Caption</span>
-           <input type="text" placeholder="Caption" ng-model="caption">
-         </label>
-        <button class="item button button-block button-positive" ng-click="pushData()">
-          Submit
-        </button>
-    </div>
-  </div>
 
 <!-- user form code -->
   <div class="form" ng-show="show_val1">
@@ -99,6 +67,14 @@
       
     </div>
   </div>
+
+
+    <super-navigate location="Feed#post">
+    <button class="item button button-block button-positive" id="bottom">
+      Post
+    </button>
+    </super-navigate>
+
 
 </div>
 

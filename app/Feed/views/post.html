@@ -1,0 +1,31 @@
+<div ng-controller="PostController">
+
+
+<!-- posting form code -->
+  <div class="form">
+    <div class="list">
+
+         <!-- Cloudinary Photo Upload-->
+         <div class="preview">
+            <img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" />
+         </div> <br />
+
+         <form class="upload_form"></form>
+         <div class="progress_bar"></div>
+
+         <label class="item item-input item-floating-label">
+           <span class="input-label">Send to:</span>
+           <input type="text" placeholder="Send to:" ng-model="receiver">
+         </label>
+
+         <label class="item item-input item-floating-label">
+           <span class="input-label">Caption</span>
+           <input type="text" placeholder="Caption" ng-model="caption">
+         </label>
+        <button class="item button button-block button-positive" ng-click="pushData()">
+          Submit
+        </button>
+    </div>
+  </div>
+
+</div>

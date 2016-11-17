@@ -37,55 +37,7 @@ angular
     $scope.user = undefined;
     $scope.delay = undefined;
 
-    $scope.publicIds = [];
 
-    // James' Cloudinary Account
-    // $.cloudinary.config({ cloud_name: 'ddwxpmknv', api_key: "834654812264824"});
-    // $('.upload_form').append($.cloudinary.unsigned_upload_tag("qx113r10",
-    //   { cloud_name: 'ddwxpmknv' }));
-
-    // Lenny's Cloudinary Account
-    $.cloudinary.config({
-      cloud_name: "daxutqqyt"
-    });
-
-    // For Android
-    $(".cloudinary_fileupload").attr("accept", "image/*;capture=camera");
-
-    $('.upload_form').append($.cloudinary.unsigned_upload_tag("mmbawtto", {
-      cloud_name: 'daxutqqyt',
-      tags: "browser_uploads"
-    }))
-
-    .bind("cloudinarydone", function(e, data) {
-      $(".preview").append("<div id=" + data.result.public_id + "></div>");
-      $("#" + data.result.public_id).append($.cloudinary.image(data.result.public_id, {
-          format: data.result.format,
-          version: data.result.version,
-          crop: "fill",
-          width: 300,
-          height: 300
-        }))
-        // .append("<button class="+data.result.public_id+">X</button>");
-
-      $scope.publicIds.push(data.result.public_id);
-      $scope.image = "http://res.cloudinary.com/daxutqqyt/image/upload/v1478125497/" + $scope.publicIds.pop();
-      $(".progress_bar").css("width", 0 + "%");
-      flag = true;
-      if (flag) {
-        $("#placeholder").css("display", "none");
-      }
-    })
-
-    .bind("cloudinaryprogress", function(e, data) {
-      $(".progress_bar").css("width",
-        Math.round((data.loaded * 100.0) / data.total) + "%");
-    });
-
-
-    $scope.user = "";
-
-    $scope.pass_hash = '';
     $scope.messages = undefined;
     $scope.test = undefined;
     $scope.senders = undefined;
@@ -235,32 +187,6 @@ var updateTime = function(){
 
     };
 
-    $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
-    $scope.caption = '';
-    $scope.receiver = '';
-
-    $scope.pushData = function() {
-
-      var recv_acc = '/users/' + $scope.receiver + '/messages/' + $scope.user;
-      var ref = database.ref().child(recv_acc);
-
-      ref.push({
-        'image': $scope.image,
-        'message': $scope.caption,
-        'timestamp': Date.now(),
-        'read': 0,
-        'delivered': 0
-      });
-
-      $scope.show_val = false;
-
-
-      $scope.image = "";
-      $scope.caption = "";
-      $scope.receiver = "";
-
-      $(".preview").empty();
-    }
 
     $scope.showPost = function() {
 
@@ -369,7 +295,7 @@ var updateTime = function(){
       $scope.user = logs_temp;
     }
 
-    localStorage.removeItem('snail_usr');
+    //localStorage.removeItem('snail_usr');
 
     getSenders();
     updateMailIcons();
