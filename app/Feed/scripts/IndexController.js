@@ -300,8 +300,8 @@ var updateTime = function(){
     getSenders();
     updateMailIcons();
 
-    $interval(getSenders, 20000);
-    $interval(updateMailIcons, 20000);
+    $interval(getSenders, 5000);
+    $interval(updateMailIcons, 5000);
     $interval(updateTime, 1000);
 
   });
