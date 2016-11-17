@@ -32,13 +32,14 @@ angular
     firebase.initializeApp(config);
     var database = firebase.database();
 
+    var fail_case = function() {
+      $scope.cond = 'Incorrect Password!';
+    }
 
     $scope.auth = function() {
       var remote_hash_query = '/users/' + $scope.user + '/password';
       var remote_hash;
-      //$scope.cond = '';
-      //$scope.ph = remote_hash_query;
-      //$scope.cond = 'bf';
+
       //Get password
       database.ref(remote_hash_query).once('value').then(function(snapshot) {
         
@@ -52,9 +53,8 @@ angular
           localStorage.setItem('snail_usr', $scope.user);
           steroids.initialView.dismiss();
         }
-          
-        $scope.cond = 'Incorrect Password!';
 
+        fail_case();
 
       });
 
