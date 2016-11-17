@@ -1,0 +1,41 @@
+<div ng-controller="RegisterController">
+
+	<div class="content">
+
+
+	  	<div class="list list-inset">
+
+	  	  	<h4>Choose a username:</h4>
+
+	  	  	<br>
+
+  			<label class="item item-input">
+    			<input type="text" placeholder="Username" ng-model="newUser">
+  			</label>
+
+  			<br>
+
+  			  <h4>Choose a password:</h4>
+
+  			  <br>
+
+		  <label class="item item-input">
+		    <input type="password" placeholder="Password" ng-model="newPass">
+		  </label>
+
+		</div>
+
+		<br>
+
+		<button class="item button button-block button-positive" ng-click="createAccount()">
+			Register
+		</button>
+
+
+		<div>
+			{{cond}}
+		</div>
+
+	</div>
+
+</div>
