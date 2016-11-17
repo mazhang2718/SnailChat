@@ -9,7 +9,15 @@
 		  	</div>
 
 		  	<br>
-	  </div>
+	  	</div>
+	  	<div class="list list-inset">
+  			<label class="item item-input">
+    			<input type="text" placeholder="Username" ng-model="user">
+  			</label>
+		  <label class="item item-input">
+		    <input type="password" placeholder="Password" ng-model="pass">
+		  </label>
+		</div>
 <!-- 
 	    <div class="form">
 		    <div class="list">
@@ -24,9 +32,19 @@
 		    </div>
   		</div> -->
 
-  				      <button class="item button button-block button-positive" ng-click="pushDataUser()">
-		     Enter
-		    </button>
+		<button class="item button button-block button-positive" ng-click="auth()">
+			Login
+		</button>
+
+		<!--div>
+			remote:{{ph}}
+		</div>
+		<div>
+			local:{{pph}}
+		</div-->
+		<div>
+			{{cond}}
+		</div>
 
 	</div>
 

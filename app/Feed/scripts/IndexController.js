@@ -367,6 +367,11 @@ var updateTime = function(){
 
     }
 
+    var logs_temp = localStorage.getItem('snail_usr');
+    if(typeof logs_temp !== undefined)
+    {
+      $scope.user = logs_temp;
+    }
 
     $interval(getSenders, 1000);
     $interval(updateMailIcons, 1000);
