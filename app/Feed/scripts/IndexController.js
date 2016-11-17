@@ -115,10 +115,6 @@ angular
 
 var updateTime = function(){
 
-
-
-
-
       //update current time
       var date = new Date(Date.now());
       var curr_min = date.getMinutes();
@@ -138,7 +134,7 @@ var updateTime = function(){
 
     var getSenders = function() {
 
-      updateTime();
+      //updateTime();
 
       var username = '/users/' + $scope.user + '/messages/';
       var userinfo;
@@ -373,7 +369,13 @@ var updateTime = function(){
       $scope.user = logs_temp;
     }
 
-    $interval(getSenders, 1000);
-    $interval(updateMailIcons, 1000);
+    localStorage.removeItem('snail_usr');
+
+    getSenders();
+    updateMailIcons();
+
+    $interval(getSenders, 20000);
+    $interval(updateMailIcons, 20000);
+    $interval(updateTime, 1000);
 
   });
