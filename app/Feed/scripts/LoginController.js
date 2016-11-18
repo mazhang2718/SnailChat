@@ -17,8 +17,6 @@ angular
 
     $scope.user = undefined;
     $scope.pass = undefined;
-    $scope.ph = undefined;
-    $scope.pph = undefined;
     $scope.cond = undefined;
 
     var config = {
@@ -44,10 +42,8 @@ angular
       database.ref(remote_hash_query).once('value').then(function(snapshot) {
         
         remote_hash = snapshot.val();
-        $scope.ph = remote_hash;
         //this isn't actually a secure hash
         var pass_hash = $scope.pass.hashCode();
-        $scope.pph = pass_hash;
 
         if (remote_hash == pass_hash) {
           localStorage.setItem('snail_usr', $scope.user);

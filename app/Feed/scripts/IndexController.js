@@ -1,25 +1,3 @@
-var getLastDeliveryTime = function(delay_min) {
-  var date = new Date(Date.now());
-  var new_date = date;
-  var curr_min = date.getMinutes();
-  var ret = 0;
-
-  if (curr_min < delay_min) {
-    //if not passed subtract an hour
-    new_date.setMinutes(delay_min);
-    new_date.setSeconds(0);
-    var ret = parseInt((new_date.getTime() / 1000).toFixed(0)) - 3600
-  } else {
-    //otherwise don't
-    new_date.setMinutes(delay_min);
-    new_date.setSeconds(0);
-    var ret = parseInt((new_date.getTime() / 1000).toFixed(0))
-  }
-
-  return ret;
-};
-
-
 angular
   .module('Feed')
   .controller('IndexController', function($scope, $interval, $timeout, supersonic) {
@@ -65,28 +43,8 @@ angular
     var database = firebase.database();
 
 
-var updateTime = function(){
-
-      //update current time
-      var date = new Date(Date.now());
-      var curr_min = date.getMinutes();
-      $scope.currHour = date.getHours();
-      if (curr_min > $scope.delay) {
-        $scope.currHour = $scope.currHour + 1;
-      }
-      if ($scope.currHour > 12) {
-        $scope.currHour = $scope.currHour - 12;
-      }
-      if ($scope.currHour == 0) {
-        $scope.currHour = 12;
-      }
-
-
-}
-
     var getSenders = function() {
 
-      //updateTime();
 
       var username = '/users/' + $scope.user + '/messages/';
       var userinfo;
@@ -113,8 +71,7 @@ var updateTime = function(){
 
       var query = '/users/' + $scope.user + '/messages/' + sender + '/';
       var messages;
-
-
+      var currentTime = Date.now();
 
       var userinfo;
 
@@ -125,8 +82,8 @@ var updateTime = function(){
         var updates = {};
         for (key in Object.keys(userinfo)) {
           key = Object.keys(userinfo)[key];
-          var firebase_path = '/users/' + $scope.user + '/messages/' + sender + '/' + key + '/delivered/'
-          if (parseInt((userinfo[key]['timestamp'] / 1000).toFixed(0)) <= getLastDeliveryTime($scope.delay)) {
+          var firebase_path = '/users/' + $scope.user + '/messages/' + sender + '/' + key + '/delivered/';
+          if (userinfo[key]['timestampFuture'] <= currentTime) {
             updates[firebase_path] = 1;
           }
           else{
@@ -137,30 +94,27 @@ var updateTime = function(){
       });
 
 
-
-
       database.ref(query).once('value').then(function(snapshot) {
         messages = snapshot.val();
 
         for (var message in messages) {
           message = messages[message];
-          if ((getLastDeliveryTime($scope.delay) > message.timestamp/1000 && message['read'] === 0)) {
+          if (message['read'] === 0 && message['delivered'] == 1) {
             $scope.icons[sender] = '/icons/email.svg';
             deliveredMessages += 1;
             return;
           }
-          else if ((getLastDeliveryTime($scope.delay) <= message.timestamp/1000 && message['read'] === 0)){
+          else if ((message['read'] === 0)){
             pendingMessages += 1;
           }
         }
         $scope.icons[sender] = '/icons/email_open.svg';
       });
+
+
     };
 
     var updateMailIcons = function() {
-
-      //pendingMessages = 0;
-      //deliveredMessages = 0;
 
       for (var sender in $scope.senders) {
         sender = $scope.senders[sender];
@@ -199,38 +153,6 @@ var updateTime = function(){
     var showModals = false;
     var pushedDelay = undefined;
 
-    $scope.pushDataUser = function() {
-
-      showModals = false;
-
-
-      $scope.show_val1 = false;
-
-      if ($scope.delay < 1) {
-        $scope.delay = 1;
-      } else if ($scope.delay > 59) {
-        $scope.delay = 59;
-      }
-
-      pushedDelay = $scope.delay;
-
-      updateModals();
-
-       $timeout(function() {
-           showModals = true;
-        }, 2000);
-
-    }
-
-    $scope.showUser = function() {
-
-      $scope.show_val1 = !$scope.show_val1;
-      $scope.show_val = false;
-      window.scrollTo(0, 0);
-
-    };
-
-
 
     var updateModals = function(){
 
@@ -254,12 +176,12 @@ var updateTime = function(){
 
               for (var j = 0; j<msgs.length; j++) {
                 msg = allUsers[user][msgs[j]];
-                if (msg['delivered'] == 1 && msg['read'] == 0 && showModals && pushedDelay == $scope.delay) {
+                if (msg['delivered'] == 1 && msg['read'] == 0 && showModals) {
                   $scope.modalMessage = "New messages have been delivered for you!";
                   $("#myModal").modal();
                   return;
                 }
-                else if (msg['delivered'] == 0 && msg['read'] == 0 && showModals && pushedDelay == $scope.delay){
+                else if (msg['delivered'] == 0 && msg['read'] == 0 && showModals){
                   $scope.modalMessage = "New messages are being sent to you!";
                   $("#myModal").modal();
                   return;
@@ -290,6 +212,7 @@ var updateTime = function(){
     }
 
     var logs_temp = localStorage.getItem('snail_usr');
+
     if(typeof logs_temp !== undefined)
     {
       $scope.user = logs_temp;
@@ -300,8 +223,14 @@ var updateTime = function(){
     getSenders();
     updateMailIcons();
 
-    $interval(getSenders, 5000);
-    $interval(updateMailIcons, 5000);
-    $interval(updateTime, 1000);
+       $timeout(function() {
+       showModals = true;
+    }, 2000);
+
+    updateModals();
+
+    $interval(getSenders, 1000);
+    $interval(updateMailIcons, 1000);
+    //$interval(updateTime, 1000);
 
   });

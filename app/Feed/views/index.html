@@ -1,33 +1,14 @@
 <div ng-controller="IndexController">
 
   <super-navbar>
-    <super-navbar-button side='left' ng-click="showUser()">User</super-navbar-button>
     <super-navbar-title ng-bind = "user"></super-navbar-title>
   </super-navbar>
 
 
   <!-- Alert Popup-->
-  <div class="alert" ng-show="show_alert">Someone sent you a message!</div>
 
   <div class="notifications">{{alertMessage}}</div>
 
-
-<!-- user form code -->
-  <div class="form" ng-show="show_val1">
-    <div class="list">
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Username:</span>
-        <input type="text" placeholder="" ng-model="user">
-      </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Receive messages at {{currHour}}:{{delay}}</span>
-        <input type="number" placeholder="" ng-model="delay">
-      </label>
-      <button class="item button button-block button-royal" ng-click="pushDataUser()">
-     Save
-    </button>
-    </div>
-  </div>
 
 <!-- Sender view code -->
 
