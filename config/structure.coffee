@@ -26,12 +26,11 @@ module.exports =
     location: "Feed#login"
 
 
-  # drawers:
-  #   left:
-  #     id: "leftDrawer"
-  #     location: "example#drawer"
-  #     showOnAppLoad: false
-  #   options:
-  #     animation: "swingingDoor"
-  #
+  drawers:
+    left:
+      id: "leftDrawer"
+      location: "Feed#drawer"
+      showOnAppLoad: false
+    options:
+       animation: "swingingDoor"
 

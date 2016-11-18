@@ -222,6 +222,11 @@ var updateTime = function(){
 
     }
 
+    $scope.showDraw = function() {
+      supersonic.ui.drawers.open('leftDrawer');
+
+    };
+
     $scope.showUser = function() {
 
       $scope.show_val1 = !$scope.show_val1;
