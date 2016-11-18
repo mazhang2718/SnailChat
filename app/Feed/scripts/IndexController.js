@@ -176,12 +176,12 @@ angular
 
               for (var j = 0; j<msgs.length; j++) {
                 msg = allUsers[user][msgs[j]];
-                if (msg['delivered'] == 1 && msg['read'] == 0 && showModals && pushedDelay == $scope.delay) {
+                if (msg['delivered'] == 1 && msg['read'] == 0 && showModals) {
                   $scope.modalMessage = "New messages have been delivered for you!";
                   $("#myModal").modal();
                   return;
                 }
-                else if (msg['delivered'] == 0 && msg['read'] == 0 && showModals && pushedDelay == $scope.delay){
+                else if (msg['delivered'] == 0 && msg['read'] == 0 && showModals){
                   $scope.modalMessage = "New messages are being sent to you!";
                   $("#myModal").modal();
                   return;
@@ -229,8 +229,8 @@ angular
 
     updateModals();
 
-    $interval(getSenders, 5000);
-    $interval(updateMailIcons, 5000);
+    $interval(getSenders, 1000);
+    $interval(updateMailIcons, 1000);
     //$interval(updateTime, 1000);
 
   });
