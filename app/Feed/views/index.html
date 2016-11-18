@@ -12,7 +12,7 @@
 
 <!-- Sender view code -->
 
-  <div class='list-group'>
+  <div class='list-group senders-list'>
     <div ng-repeat="sender in senders">
       <super-navigate location="Feed#messages?id={{user}},{{sender}},{{delay}}" class="item item-thumbnail-left">
         <img ng-src={{icons[sender]}}>

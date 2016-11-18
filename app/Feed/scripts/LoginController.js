@@ -47,6 +47,7 @@ angular
 
         if (remote_hash == pass_hash) {
           localStorage.setItem('snail_usr', $scope.user);
+          localStorage.setItem('snail_test', 'False');
           steroids.initialView.dismiss();
         }
 

@@ -1,8 +1,3 @@
-<script>
-  document.addEventListener("touchmove", function(e){
-    e.preventDefault();
-  });
-</script>
 <ul class="list">
 	<li class="item item-divider">Menu</li>
 	<li class="item item-icon-left" onclick="steroids.initialView.show()">
@@ -14,4 +9,13 @@
   	<i class="icon super-person-stalker"></i>
   	Contacts
   </li-->
+  	<li class="item item-divider">Test Options</li>
+  	<li class="item item-icon-left" onclick="localStorage.setItem('snail_test', 'True');supersonic.ui.drawers.close();">
+  		<i class="icon super-android-time"></i>
+  		Instant Mode
+  	</li>
+	<li class="item item-icon-left" onclick="localStorage.setItem('snail_test', 'False');supersonic.ui.drawers.close();">
+		<i class="icon super-android-time"></i>
+		Delay Mode
+	</li>
 </ul>

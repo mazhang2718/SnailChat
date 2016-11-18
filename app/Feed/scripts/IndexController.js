@@ -22,6 +22,8 @@ angular
     $scope.icons = undefined;
     $scope.show_val = false;
     $scope.show_alert = false;
+    $scope.tester = undefined;
+    $scope.testVal = false;
 
 
     $scope.pending = false;
@@ -83,7 +85,7 @@ angular
         for (key in Object.keys(userinfo)) {
           key = Object.keys(userinfo)[key];
           var firebase_path = '/users/' + $scope.user + '/messages/' + sender + '/' + key + '/delivered/';
-          if (userinfo[key]['timestampFuture'] <= currentTime) {
+          if (userinfo[key]['timestampFuture'] <= currentTime || $scope.tester == 'True') {
             updates[firebase_path] = 1;
           }
           else{
@@ -216,6 +218,23 @@ angular
 
     }
 
+    var updateTest = function(){
+
+      var test = localStorage.getItem('snail_test');
+
+      if(typeof test !== undefined)
+      {
+        $scope.tester = test;
+
+        if ($scope.tester == 'True')
+        {
+          updateMailIcons();
+          getSenders();
+          $scope.testVal = true;
+        }
+      }
+    }
+
     var logs_temp = localStorage.getItem('snail_usr');
 
     if(typeof logs_temp !== undefined)
@@ -235,7 +254,8 @@ angular
     updateModals();
 
     $interval(getSenders, 15000);
-    $interval(updateMailIcons, 15000);
+    $interval(updateMailIcons, 5000);
+    $interval(updateTest, 1000);
     //$interval(updateTime, 1000);
 
   });

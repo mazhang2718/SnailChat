@@ -1,4 +1,4 @@
-var orderMsg = function(msg_dict) {
+var orderMsg = function(msg_dict, tester) {
   var out = [];
 
   for (var msg in msg_dict) {
@@ -10,7 +10,7 @@ var orderMsg = function(msg_dict) {
     var currentTime = Date.now();
 
 
-     if (currentTime >= deliveryTime)
+     if (currentTime >= deliveryTime || tester == 'True')
      {
       var item = {};
       item.image = msg_dict[msg]['image'];
@@ -46,6 +46,7 @@ angular
     $scope.sender = undefined;
     $scope.messages = undefined;
     $scope.user = undefined;
+    $scope.tester = undefined;
 
     var getUserMessages = function() {
 
@@ -57,12 +58,12 @@ angular
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
         //$scope.messages = userinfo;
-        $scope.messages = orderMsg(userinfo);
+        $scope.messages = orderMsg(userinfo, $scope.tester);
         // Update read tag of posts
         var updates = {};
         for (key in Object.keys(userinfo)) {
           key = Object.keys(userinfo)[key];
-          if (userinfo[key]['timestampFuture'] <= currentTime) {
+          if (userinfo[key]['timestampFuture'] <= currentTime || $scope.tester == 'True') {
             supersonic.logger.log("key: " + key);
             var firebase_path = '/users/' + $scope.user + '/messages/' + $scope.sender + '/' + key + '/read/'
             updates[firebase_path] = 1;
@@ -72,6 +73,19 @@ angular
       });
 
     };
+
+    var updateTest = function(){
+      var test = localStorage.getItem('snail_test');
+
+      if(typeof test !== undefined)
+      {
+        $scope.tester = test;
+        if ($scope.tester == 'True')
+        {
+          getUserMessages();
+        }
+      }
+    }
 
     supersonic.ui.views.current.whenVisible( function(){
       var clickParams = steroids.view.params.id;
@@ -85,5 +99,6 @@ angular
 
 
     $interval(getUserMessages, 15000);
+    $interval(updateTest, 1000);
 
   });
