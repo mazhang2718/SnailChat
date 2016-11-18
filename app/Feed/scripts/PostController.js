@@ -59,14 +59,22 @@ angular
     $scope.user = localStorage.getItem('snail_usr');
 
 
+
+    $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
+
     $scope.pushData = function() {
 
       var recv_acc = '/users/' + $scope.receiver + '/messages/' + $scope.user;
       var ref = database.ref().child(recv_acc);
+
+      var currentTime = Date.now();
+      var futureTime = Math.floor(2000*60 + 3000*60*Math.random()) + currentTime ;
+
       var data = {
         'image': $scope.image,
         'message': $scope.caption,
-        'timestamp': Date.now(),
+        'timestamp': currentTime,
+        'timestampFuture': futureTime,
         'read': 0,
         'delivered': 0
       }
