@@ -1,19 +1,21 @@
-var orderMsg = function(msg_dict, delay_min) {
+var orderMsg = function(msg_dict) {
   var out = [];
 
   for (var msg in msg_dict) {
 
     //get last delivery time
     //only push messages before that delivery time
-    var delivery_time = getLastDeliveryTime(delay_min);
-    var post_time = parseInt((msg_dict[msg]['timestamp']/1000).toFixed(0));
+    //var delivery_time = getLastDeliveryTime(delay_min);
+    var deliveryTime = msg_dict[msg]['timestampFuture'];
+    var currentTime = Date.now();
 
 
-     if (post_time <= delivery_time)
+     if (currentTime >= deliveryTime)
      {
       var item = {};
       item.image = msg_dict[msg]['image'];
       item.timestamp = msg_dict[msg]['timestamp'];
+      item.timestampFuture = deliveryTime;
       item.message = msg_dict[msg]['message'];
 
       out.push(item);
@@ -24,30 +26,6 @@ var orderMsg = function(msg_dict, delay_min) {
   return out.reverse();
 };
 
-var getLastDeliveryTime = function(delay_min) {
-  var date = new Date(Date.now());
-  var new_date = date;
-  var curr_min = date.getMinutes();
-  var ret = 0;
-
-  if (curr_min < delay_min)
-  {
-    //if not passed subtract an hour
-    new_date.setMinutes(delay_min);
-    new_date.setSeconds(0);
-    var ret = parseInt((new_date.getTime()/1000).toFixed(0)) - 3600
-  }
-  else
-  {
-    //otherwise don't
-    new_date.setMinutes(delay_min);
-    new_date.setSeconds(0);
-    var ret = parseInt((new_date.getTime()/1000).toFixed(0))
-  }
-
-  //supersonic.logger.log(ret);
-  return ret;
-};
 
 angular
   .module('Feed')
@@ -67,24 +45,24 @@ angular
 
     $scope.sender = undefined;
     $scope.messages = undefined;
-    $scope.delay = undefined;
     $scope.user = undefined;
 
     var getUserMessages = function() {
 
       var username = '/users/' + $scope.user + '/messages/' + $scope.sender;
       var userinfo;
+      var currentTime = Date.now();
 
       // Get list of messages for sender
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
         //$scope.messages = userinfo;
-        $scope.messages = orderMsg(userinfo, $scope.delay);
+        $scope.messages = orderMsg(userinfo);
         // Update read tag of posts
         var updates = {};
         for (key in Object.keys(userinfo)) {
           key = Object.keys(userinfo)[key];
-          if (parseInt((userinfo[key]['timestamp'] / 1000).toFixed(0)) <= getLastDeliveryTime($scope.delay)) {
+          if (userinfo[key]['timestampFuture'] <= currentTime) {
             supersonic.logger.log("key: " + key);
             var firebase_path = '/users/' + $scope.user + '/messages/' + $scope.sender + '/' + key + '/read/'
             updates[firebase_path] = 1;
@@ -100,13 +78,12 @@ angular
       var arr = clickParams.split(",");
       $scope.user = arr[0]
       $scope.sender = arr[1];
-      $scope.delay = arr[2];
     });
 
-    getUserMessages()
+    getUserMessages();
 
 
 
-    $interval(getUserMessages, 1000);
+    $interval(getUserMessages, 15000);
 
   });
