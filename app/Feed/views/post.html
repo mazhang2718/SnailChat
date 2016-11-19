@@ -15,7 +15,12 @@
 
          <label class="item item-input item-floating-label">
            <span class="input-label">Send to:</span>
-           <input type="text" placeholder="Send to:" ng-model="receiver">
+           <input id="Send" type="text" placeholder="Send to:" ng-model="receiver" ng-focus="showContacts()" ng-change="showContacts()">
+           <div ng-show="contactVisible" id="myDropdown" class="dropdown-content">
+             <li ng-show="contactVisible" ng-click="selectFriend(contact)" class="item col col-75" ng-repeat="contact in contacts | filter:receiver">
+             {{contact}}</li>
+
+           </div>
          </label>
 
          <label class="item item-input item-floating-label">

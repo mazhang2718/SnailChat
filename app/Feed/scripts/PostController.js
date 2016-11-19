@@ -91,6 +91,31 @@ angular
       supersonic.ui.layers.pop();
     }
 
+  if ($scope.user) {
+    $scope.contacts = [];
+    $scope.loadContact = (function() {
+      var ref = "/users/" + $scope.user + "/contacts";
+      database.ref(ref).once('value').then(function (snapshot) {
+        var data = snapshot.val();
+        for (var prop in data) {
+          $scope.contacts.push(data[prop]);
+        }
+      })
+
+    })();
+  }
+
+  $scope.contactVisible = false;
+  $scope.searchUser = "";
+  $scope.showContacts = function () {
+    $scope.contactVisible = true;
+
+  }
+  $scope.selectFriend = function(input) {
+    $scope.receiver = input;
+    $scope.contactVisible = false;
+  }
 
 
-  });
+
+});
