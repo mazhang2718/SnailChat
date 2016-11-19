@@ -24,12 +24,15 @@
   </div>
 
   <ul class="list">
+
       <li class="item item-button-right" ng-repeat="contact in contacts | filter:searchUser">
+        <super-navigate class="item-button-right" location="Feed#post?id={{contact}}">
         {{contact}}
-        <button class="button button-positive">
-              <i class="icon super-edit"></i>
+         <button class="button button-positive"><i class="icon super-edit"></i>
         </button>
+        </super-navigate>
       </li>
+
   </ul>
     <!-- <div ng-repeat="contact in contacts">
       {{contact}}

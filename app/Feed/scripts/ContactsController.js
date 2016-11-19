@@ -26,9 +26,12 @@ angular
     var contactRef = '/users/' + $scope.user + '/contacts';
     database.ref(contactRef).once('value').then(function (snapshot) {
       var data = snapshot.val();
-      supersonic.logger.log("fetched contact list: " + data);
       for (var prop in data) {
-        $scope.contacts.push(data[prop]);
+        var unique = true;
+        for (var i = 0; i < $scope.contacts.length; i++) {
+          if ($scope.contacts[i] === data[prop]) unique = false;
+        }
+        if (unique) $scope.contacts.push(data[prop]);
       }
       supersonic.logger.log($scope.contacts);
     });

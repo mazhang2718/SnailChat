@@ -116,6 +116,12 @@ angular
     $scope.contactVisible = false;
   }
 
+  supersonic.ui.views.current.whenVisible( function(){
+    var clickParams = steroids.view.params.id;
+    var arr = clickParams.split(",");
+    $scope.receiver = arr[0]
+  });
+
 
 
 });
