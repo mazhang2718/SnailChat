@@ -1,9 +1,39 @@
 <div ng-controller="ContactsController">
-  This is contacts list : {{user}}
 
-    <div ng-repeat="contact in contacts">
-      {{contact}}
+  <super-navbar>
+    <super-navbar-button side='right' ng-click="addFriends()">+</super-navbar-button>
+    <super-navbar-title>Contact List</super-navbar-title>
+  </super-navbar>
+
+  <div ng-show="addShow" class="list">
+    <div class="item item-input-inset">
+      <label class="item-input-wrapper">
+        <input ng-model="targetUser" type="text" placeholder="User Name">
+      </label>
+      <button ng-click="isValid()" class="button button-small">
+        Add
+      </button>
     </div>
+  </div>
+
+  <div class="list list-inset">
+    <label class="item item-input">
+      <i class="icon super-search placeholder-icon"></i>
+      <input type="text" placeholder="Search">
+    </label>
+  </div>
+
+  <ul class="list">
+      <li class="item item-button-right" ng-repeat="contact in contacts">
+        {{contact}}
+        <button class="button button-positive">
+              <i class="icon super-edit"></i>
+        </button>
+      </li>
+  </ul>
+    <!-- <div ng-repeat="contact in contacts">
+      {{contact}}
+    </div> -->
 
 
 </div>
