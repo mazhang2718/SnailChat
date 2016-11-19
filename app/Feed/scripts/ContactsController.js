@@ -6,6 +6,7 @@ angular
     $scope.user = localStorage.getItem('snail_usr');
     $scope.addShow = false;
     $scope.targetUser = "";
+    $scope.searchUser = "";
 
     // Set up database
     var config = {

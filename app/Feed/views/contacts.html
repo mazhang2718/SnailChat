@@ -19,12 +19,12 @@
   <div class="list list-inset">
     <label class="item item-input">
       <i class="icon super-search placeholder-icon"></i>
-      <input type="text" placeholder="Search">
+      <input ng-model="searchUser" type="text" placeholder="Search">
     </label>
   </div>
 
   <ul class="list">
-      <li class="item item-button-right" ng-repeat="contact in contacts">
+      <li class="item item-button-right" ng-repeat="contact in contacts | filter:searchUser">
         {{contact}}
         <button class="button button-positive">
               <i class="icon super-edit"></i>
