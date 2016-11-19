@@ -59,6 +59,7 @@ angular
 
         supersonic.ui.dialog.alert("Ooops!", options).then(function() {
           supersonic.logger.log("Alert closed.");
+          $scope.targetUser = "";
         });
       });
     }
