@@ -46,12 +46,12 @@ angular
         var pass_hash = $scope.pass.hashCode();
 
         if (remote_hash == pass_hash) {
+          $scope.cond = undefined;
           localStorage.setItem('snail_usr', $scope.user);
           localStorage.setItem('snail_test', 'False');
           steroids.initialView.dismiss();
         }
-
-        fail_case();
+        else {fail_case();}
 
       });
 
