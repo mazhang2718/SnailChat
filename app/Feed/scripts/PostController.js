@@ -60,7 +60,7 @@ angular
 
 
 
-    $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
+    $scope.image = '';
 
     $scope.pushData = function() {
 
