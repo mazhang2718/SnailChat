@@ -1,23 +1,23 @@
 <div ng-controller="MessagesController">
   <super-navbar>
-    <super-navbar-title ng-bind="sender"></super-navbar-title>
+    <super-navbar-title>Messages</super-navbar-title>
   </super-navbar>
 
-  <div class='list-group'>
-    <div ng-repeat="message in messages" class="card message">
-      <img ng-src={{message['image']}} width="100%" height="100%"/>
-      <div class="row">
-        <div class="col text-right info">
-          Sent: {{message['timestamp'] | date:'MMM. d  h:mm a'}}
-        </div>
-        <div class="col text-right info">
-          Delivered: {{message['timestampFuture'] | date:'MMM. d  h:mm a'}}
-        </div>
-      </div>
-      <div class="row caption">
-        <div class="col col-100">{{message['message']}}</div>
-      </div>
-    </div>
+  <div id=right ng-click="goRight()">
+  </div>
+  <div id=left ng-click="goLeft()">
   </div>
 
+  <div class="info text-center">
+    <h2>{{sender}}</h2>
+  </div>
+  <div>
+    <img class="full-image" ng-src={{messages[curr]['image']}} width="100%" height="100%">
+  </div>
+  <div class="caption">
+      {{messages[curr]['message']}}
+  </div>
+  <div class="caption-subdued">
+    Sent: {{messages[curr]['timestamp'] | date:'MMM. d,  h:mm a'}}<br>Delivered: {{messages[curr]['timestampFuture'] | date:'MMM. d,  h:mm a'}}
+  </div>
 </div>

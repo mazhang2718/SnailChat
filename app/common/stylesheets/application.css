@@ -29,15 +29,23 @@
 }
 
 .caption {
+	color: #444444;
+	font-size: 22px;
+	padding-top: 3%;
+	padding-left: 5%;
+}
+
+.caption-subdued {
 	color: #828282;
-	font-size: 16px;
-	padding-left: 25px;
-	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	padding-top: 2%;
+	padding-left: 5%;
 }
 
 .info {
-	color: #AAAAAA;
-	padding-top: 7px;
+	color: #444444;
+	padding-top: 7%;
+	padding-bottom: 3%;
 }
 
 .content {
@@ -99,4 +107,20 @@
  	bottom: 0px;
  	z-index: 10000;
 
+ }
+
+ #right {
+ 	width: 50%;
+ 	position: fixed;
+ 	height: 100%;
+ 	right: 0px;
+ 	z-index: 10000;
+ }
+
+  #left {
+ 	width: 50%;
+ 	position: fixed;
+ 	height: 100%;
+ 	left: 0px;
+ 	z-index: 10000;
  }
