@@ -11,7 +11,7 @@
 	font-family: 'Arial', Helvetica, sans-serif;
 }
 
-body, .list-group, .senders-list, .item-thumbnail-left, .list-inset{
+body, .list-group, .item-thumbnail-left, .list-inset{
 	background-image: url(/icons/paper.png) !important;
 }
 
@@ -126,7 +126,6 @@ hr {
 .sender {
 	color: #828282;
 	font-size: 24px;
-	font-family: 'Roboto', sans-serif;
 	height: 100%;
 	width: 100%;
 }
@@ -170,6 +169,15 @@ hr {
 	right: 0;
 	left: 0;
 }
+
+#myModal2{
+	position: fixed;
+	background-color: grey;
+	top: 25%;
+	right: 0;
+	left: 0;
+}
+
 
 .modal{
 	position: fixed;

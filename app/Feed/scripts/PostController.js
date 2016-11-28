@@ -88,6 +88,11 @@ angular
 
       $(".preview").empty();
 
+      $("#myModal2").modal();
+
+    }
+
+    $scope.dismiss = function(){
       supersonic.ui.layers.pop();
     }
 
