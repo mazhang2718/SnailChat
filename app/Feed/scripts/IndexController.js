@@ -56,16 +56,38 @@ angular
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
         $scope.senders = Object.keys(userinfo);
+
         if ($scope.icons == undefined) {
           $scope.icons = {};
-          for (var sender in $scope.senders) {
+        }
+
+        for (var sender in $scope.senders) {
+          sender_name = $scope.senders[sender];
+          if (noMatureMessages(userinfo[sender_name])) {
+            //Remove user from the list of senders
+            supersonic.logger.log("in the no mature messages: " + sender_name);
+            supersonic.logger.log(sender);
+            $scope.senders.splice(sender, 1);
+            supersonic.logger.log($scope.senders);
+          }
+          else {
+            supersonic.logger.log("in the else: " + sender);
             $scope.icons[$scope.senders[sender]] = '/icons/email_open.svg';
           }
         }
-
-
       });
+    };
 
+    var noMatureMessages = function(messages) {
+      for (var message in messages) {
+        message = messages[message];
+
+        if (message.timestampFuture <= Date.now()) {
+          return false;
+        }
+      }
+      supersonic.logger.log('hitting the true case');
+      return true;
     };
 
 
@@ -165,7 +187,7 @@ angular
 
 
         var ref = database.ref("users/" + $scope.user + "/messages");
-        
+
         ref.on("value", function(snapshot){
 
           var allUsers = snapshot.val();
@@ -200,7 +222,7 @@ angular
 
     }
 
-    
+
 
     var updateMessage = function(){
 
