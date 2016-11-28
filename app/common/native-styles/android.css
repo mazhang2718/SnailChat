@@ -4,10 +4,9 @@
  ***********************************************************/
 
 navigation-bar {
-  background-color: white;
   color: #9a5fdb;
-  padding-left: 6px;
-  padding-right: 6px;
+  margin-bottom:2px;
+  border-bottom: 2px black;
 }
 
 navigation-bar#logoIndex {

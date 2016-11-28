@@ -11,10 +11,6 @@ angular
       messagingSenderId: "396973912921"
     };
 
-    supersonic.ui.navigationBar.setStyle("background-color: #ff0000; border: 5px solid black;").then(function() {
-      supersonic.logger.log("Navigation bar style was set.");
-    });
-
 
     $scope.user = undefined;
     $scope.delay = undefined;

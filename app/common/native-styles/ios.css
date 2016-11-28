@@ -4,9 +4,7 @@
  ***********************************************************/
 
 navigation-bar {
-  display: none;
   color: #9a5fdb;
-
   margin-bottom:2px;
   border-bottom: 2px black;
 }

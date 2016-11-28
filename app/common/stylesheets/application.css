@@ -2,13 +2,16 @@
 /* GENERAL CSS */
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Arial', Helvetica, sans-serif;
   font-weight: normal;
   font-style: normal;
-  src: url("https://fonts.googleapis.com/css?family=Roboto");
 }
 
-body, .list-group, .senders-list, .item-thumbnail-left, .content{
+*{
+	font-family: 'Arial', Helvetica, sans-serif;
+}
+
+body, .list-group, .senders-list, .item-thumbnail-left, .list-inset{
 	background-image: url(/icons/paper.png) !important;
 }
 
@@ -59,7 +62,7 @@ input[type=submit]{
  	font-size: 1.5em;
  }
 
- .button::active{
+ .button:active, .button:visited{
  	color: white !important;
  }
 
@@ -68,7 +71,7 @@ input[type=submit]{
  	color: white;
  }
 
- .button-purple::active{
+ .button-purple::active, .button::visited{
  	color: white !important;
  }
 
@@ -275,6 +278,7 @@ hr {
  	height: 10%;
  	bottom: -8px;
  	z-index: 10000;
+ 	color: white;
 
  }
 
