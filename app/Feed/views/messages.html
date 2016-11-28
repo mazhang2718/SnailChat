@@ -1,6 +1,8 @@
 <div ng-controller="MessagesController">
 
-  <hr>
+  <super-navbar>
+  </super-navbar>
+
 
   <div id=right ng-click="goRight()">
   </div>
@@ -19,5 +21,7 @@
   <div class="caption-subdued">
     Sent: {{messages[curr]['timestamp'] | date:'MMM. d,  h:mm a'}}<br>Delivered: {{messages[curr]['timestampFuture'] | date:'MMM. d,  h:mm a'}}
   </div>
+  <br>
+  <br>
 
 </div>

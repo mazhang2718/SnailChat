@@ -10,6 +10,12 @@ navigation-bar {
   padding-right: 6px;
 }
 
+navigation-bar#logoIndex {
+  background-image: url(/icons/logo3.png);
+  background-color: white;
+  border: 2px black;
+}
+
 navigation-bar title {
   color: #9a5fdb;
   font-size: 18px;

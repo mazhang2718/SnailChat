@@ -21,9 +21,9 @@ module.exports =
     }
   ]
 
-  initialView:
-    id: "initialView"
-    location: "Feed#login"
+  #initialView:
+  #  id: "initialView"
+  #  location: "Feed#login"
 
 
   drawers:

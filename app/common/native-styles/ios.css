@@ -6,8 +6,15 @@
 navigation-bar {
   display: none;
   color: #9a5fdb;
-  background-color: white;
+
   margin-bottom:2px;
+  border-bottom: 2px black;
+}
+
+navigation-bar#logoIndex {
+  background-image: url(/icons/logo3.png);
+  background-color: white;
+  border: 2px black;
 }
 
 navigation-bar button, navigation-bar back-bar-button {

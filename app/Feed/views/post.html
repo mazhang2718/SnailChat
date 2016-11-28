@@ -1,33 +1,40 @@
 <div ng-controller="PostController">
 
-  <hr>
+  <super-navbar>
+  </super-navbar>
+
+<body>
 
 <div class="content">
 <!-- posting form code -->
-  <div class="form">
     <div class="list">
 
-         <!-- Cloudinary Photo Upload-->
-         <div class="preview">
-            <!--<img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" />-->
-         </div> <br />
 
-         <form class="upload_form"></form>
-         <!--<div class="progress_bar"></div>-->
           <p class="list-h"> Send to: </p>
          <label class="item item-input item-floating-label">
            <input type="text" placeholder="" ng-model="receiver">
          </label>
+
+         <br>
+         <!-- Cloudinary Photo Upload-->
+         <div class="preview">
+<!--             <img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" /> -->
+         </div>
+
+         <form class="upload_form" id ="upload_form"></form>
+         <!--<div class="progress_bar"></div>-->
 
           <p class="list-h"> Caption: </p>
          <label class="item item-input item-floating-label">
            <input type="text" placeholder="" ng-model="caption">
          </label>
         <button class="button button-block button-purple" ng-click="pushData()">
-          Submit
+          Send
         </button>
     </div>
-  </div>
 
 </div>
+
+
+</body>
 </div>

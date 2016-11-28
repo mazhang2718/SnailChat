@@ -8,6 +8,45 @@
   src: url("https://fonts.googleapis.com/css?family=Roboto");
 }
 
+body, .list-group, .senders-list, .item-thumbnail-left, .content{
+	background-image: url(/icons/paper.png) !important;
+}
+
+label.item{
+	background-image: none;
+	background-color: white ;
+}
+
+#upload_form > *{
+	background-image: none;
+	color: green;
+	font-size: 0px;
+}
+
+input[type=submit]{
+      border: 1px solid #bbbbbb
+      height: 38px
+      line-height: 36px
+      font-weight: bold
+      color: #333333
+      font-size: 18px  
+      font-family: Helvetica, Arial, sans-serif
+      background-color: #fff
+      padding: 0
+      width: 180px
+      border-radius: 6px
+      -moz-border-radius: 6px
+      -webkit-border-radius: 6px            
+      background-image: linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -o-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -moz-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -webkit-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -ms-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.28, rgb(244,244,244)),color-stop(0.64, rgb(254,254,254)))
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f4f4f4', EndColorStr='#fefefe')"            
+      margin: 0                       
+      cursor: p
+  }
 
  .error{
  	text-align: center;
@@ -35,6 +74,7 @@
 
 
  .button-white{
+ 	background-color: white;
  	color: black;
  }
 
