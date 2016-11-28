@@ -4,20 +4,20 @@
  ***********************************************************/
 
 navigation-bar {
-  background-color: #663399;
-  color: #ffffff;
+  background-color: white;
+  color: #9a5fdb;
   padding-left: 6px;
   padding-right: 6px;
 }
 
 navigation-bar title {
-  color: #ffffff;
+  color: #9a5fdb;
   font-size: 18px;
   font-weight: 600;
 }
 
 navigation-bar button {
-  color: #ffffff;
+  color: #9a5fdb;
   font-weight: 300;
   margin-left: 6px;
   margin-right: 6px;
@@ -29,7 +29,7 @@ navigation-bar back-indicator {
 }
 
 navigation-bar back-button {
-  color: #ffffff;
+  color: #9a5fdb;
   font-weight: 300;
 }
 

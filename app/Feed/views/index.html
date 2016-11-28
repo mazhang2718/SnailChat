@@ -2,26 +2,40 @@
 
   <super-navbar>
     <super-navbar-button side='left' ng-click="showDraw()">&#9776;</super-navbar-button>
-    <super-navbar-title ng-bind = "user"></super-navbar-title>
+    <super-navbar-title> 🐌  </super-navbar-title>
   </super-navbar>
 
+  <hr>
+
+<!--     <div class="header">
+      <div id="drawer" ng-click="showDraw()">&#9776;</div>
+      <div ng-click="" id="logo">
+          <img src="/icons/logo.png" width="50px" height="40px">
+      </div>
+    </div>
+ -->
 
   <!-- Alert Popup-->
 
-  <div class="notifications">{{alertMessage}}</div>
+  <!-- <div class="notifications">{{alertMessage}}</div> -->
 
 <!-- Sender view code -->
 
   <div class='list-group senders-list'>
+    <div class="item item-thumbnail-left" id="status">
+        <img src="/icons/on_the_way.svg">
+        <div class="row sender">
+          <div class="col sender-name">
+            SnailPost in transit!
+          </div>
+        </div>
+    </div>
     <div ng-repeat="sender in senders">
       <super-navigate location="Feed#messages?id={{user}},{{sender}},{{delay}}" class="item item-thumbnail-left">
         <img ng-src={{icons[sender]}}>
         <div class="row sender">
-          <div class="col">
+          <div class="col sender-name">
             {{sender}}
-          </div>
-          <div class="col text-right">
-            >
           </div>
         </div>
       </super-navigate>
@@ -36,7 +50,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">SnailChat</h4>
+          <h4 class="modal-title">SnailPost</h4>
         </div>
         <div class="modal-body">
           <p>{{modalMessage}}</p>
@@ -50,8 +64,8 @@
   </div>
 
   <super-navigate location="Feed#post" id="bottom">
-    <button class="item button button-block button-royal">
-      Post
+    <button class="item button button-block button-purple">
+      Send new SnailPost
     </button>
   </super-navigate>
 

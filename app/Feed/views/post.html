@@ -1,31 +1,33 @@
 <div ng-controller="PostController">
 
+  <hr>
 
+<div class="content">
 <!-- posting form code -->
   <div class="form">
     <div class="list">
 
          <!-- Cloudinary Photo Upload-->
          <div class="preview">
-            <img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" />
+            <!--<img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" />-->
          </div> <br />
 
          <form class="upload_form"></form>
-         <div class="progress_bar"></div>
-
+         <!--<div class="progress_bar"></div>-->
+          <p class="list-h"> Send to: </p>
          <label class="item item-input item-floating-label">
-           <span class="input-label">Send to:</span>
-           <input type="text" placeholder="Send to:" ng-model="receiver">
+           <input type="text" placeholder="" ng-model="receiver">
          </label>
 
+          <p class="list-h"> Caption: </p>
          <label class="item item-input item-floating-label">
-           <span class="input-label">Caption</span>
-           <input type="text" placeholder="Caption" ng-model="caption">
+           <input type="text" placeholder="" ng-model="caption">
          </label>
-        <button class="item button button-block button-royal" ng-click="pushData()">
+        <button class="button button-block button-purple" ng-click="pushData()">
           Submit
         </button>
     </div>
   </div>
 
+</div>
 </div>
