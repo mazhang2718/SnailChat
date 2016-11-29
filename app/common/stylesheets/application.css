@@ -139,6 +139,7 @@ hr {
 	font-size: 22px;
 	padding-top: 3%;
 	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .caption-subdued {
@@ -301,7 +302,7 @@ hr {
  	width: 100%;
  	position: fixed;
  	height: 10%;
- 	bottom: -8px;
+ 	bottom: 0px;
  	z-index: 10000;
  	color: white;
 

@@ -15,6 +15,7 @@ angular
     $scope.user = undefined;
     $scope.delay = undefined;
 
+
     $scope.messages = undefined;
     $scope.test = undefined;
     $scope.senders = undefined;
@@ -55,56 +56,16 @@ angular
       database.ref(username).once('value').then(function(snapshot) {
         userinfo = snapshot.val();
         $scope.senders = Object.keys(userinfo);
-
         if ($scope.icons == undefined) {
           $scope.icons = {};
-        }
-        var toRemove = [];
-        for (var sender in $scope.senders) {
-          sender_name = $scope.senders[sender];
-          if (noMatureMessages(userinfo[sender_name])) {
-            //Remove user from the list of senders
-            toRemove.push(sender);
-          }
-          else {
-            if ($scope.icons[sender_name] == null) {
-              $scope.icons[sender_name] = '/icons/opened.svg';
-            }
-          }
-          for (var i in toRemove){
-            var index = toRemove[i];
-            $scope.senders.splice(index, 1);
+          for (var sender in $scope.senders) {
+            $scope.icons[$scope.senders[sender]] = '/icons/email_open.png';
           }
         }
-        var newestPost = function(a) {
 
-          //
-          var newest = 0;
-          var senderMessages = userinfo[a];
-          for (var message in senderMessages) {
-            message = senderMessages[message];
-            newest = Math.max(message.timestampFuture, newest);
-          }
-          return newest;
-        };
 
-        var newerSender = function(a,b) {
-          return newestPost(b) - newestPost(a);
-        };
-
-        $scope.senders.sort(newerSender);
       });
-    };
 
-    var noMatureMessages = function(messages) {
-      for (var message in messages) {
-        message = messages[message];
-
-        if (message.timestampFuture <= Date.now()) {
-          return false;
-        }
-      }
-      return true;
     };
 
 
@@ -141,7 +102,7 @@ angular
         for (var message in messages) {
           message = messages[message];
           if (message['read'] === 0 && message['delivered'] == 1) {
-            $scope.icons[sender] = '/icons/not_opened.svg';
+            $scope.icons[sender] = '/icons/email.png';
             deliveredMessages += 1;
             return;
           }
@@ -149,7 +110,7 @@ angular
             pendingMessages += 1;
           }
         }
-        $scope.icons[sender] = '/icons/opened.svg';
+        $scope.icons[sender] = '/icons/email_open.png';
       });
 
 
@@ -204,7 +165,7 @@ angular
 
 
         var ref = database.ref("users/" + $scope.user + "/messages");
-
+        
         ref.on("value", function(snapshot){
 
           var allUsers = snapshot.val();
@@ -224,13 +185,11 @@ angular
                 msg = allUsers[user][msgs[j]];
                 if (msg['delivered'] == 1 && msg['read'] == 0 && showModals) {
                   $scope.modalMessage = "New messages have been delivered for you!";
-                  $("#status").hide();
                   $("#myModal").modal();
                   return;
                 }
                 else if (msg['delivered'] == 0 && msg['read'] == 0 && showModals){
                   $scope.modalMessage = "New messages are being sent to you!";
-                  $("#status").show();
                   $("#myModal").modal();
                   return;
                 }
@@ -241,7 +200,7 @@ angular
 
     }
 
-
+    
 
     var updateMessage = function(){
 
@@ -251,12 +210,10 @@ angular
       }
       else if ($scope.pending == true){
         $scope.alertMessage = "New messages are being sent to you!";
-        $("#status").show();
         pendingMessages = 0;
       }
-
-      if ($scope.pending != true){
-        $("#status").hide();
+      else{
+        $scope.alertMessage = "No new updates ):"
       }
 
     }
@@ -290,13 +247,13 @@ angular
     getSenders();
     updateMailIcons();
 
-    $timeout(function() {
+       $timeout(function() {
        showModals = true;
-    }, 3000);
+    }, 2000);
 
     updateModals();
 
-    $interval(getSenders, 10000);
+    $interval(getSenders, 15000);
     $interval(updateMailIcons, 5000);
     $interval(updateTest, 1000);
     //$interval(updateTime, 1000);
