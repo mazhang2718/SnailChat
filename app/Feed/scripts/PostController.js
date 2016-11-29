@@ -60,7 +60,7 @@ angular
 
 
 
-    $scope.image = '#';
+    $scope.image = '';
 
     $scope.pushData = function() {
 
