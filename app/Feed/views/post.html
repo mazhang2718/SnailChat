@@ -17,10 +17,11 @@
          <!--<div class="progress_bar"></div>-->
            <p class="list-h">Send to:</p>
          <label class="item item-input item-floating-label">
-           <input id="Send" type="text" placeholder="" ng-model="receiver" ng-focus="showContacts()" ng-change="showContacts()">
-           <div ng-show="contactVisible" id="myDropdown" class="dropdown-content">
+           <input id="Send" type="text" placeholder="" ng-model="receiver" ng-keydown="showContacts()">
+           <div ng-show="contactVisible">
              <li ng-show="contactVisible" ng-click="selectFriend(contact)" class="item col col-75" ng-repeat="contact in contacts | filter:receiver">
-             {{contact}}</li>
+              {{contact}}
+             </li>
 
            </div>
          </label>
@@ -50,7 +51,7 @@
 
   <div class="modal fade" id="myModal2" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -64,7 +65,7 @@
           <button type="button" class="btn btn-default" ng-click="dismiss()" data-dismiss="modal">Return</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -74,8 +75,8 @@
 <script>
 
   if ('ontouchstart' in window) {
-    /* cache dom references */ 
-    var $body = $('body'); 
+    /* cache dom references */
+    var $body = $('body');
 
     /* bind events */
     $(document)
