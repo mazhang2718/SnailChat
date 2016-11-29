@@ -1,15 +1,122 @@
+
+/* GENERAL CSS */
+
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Arial', Helvetica, sans-serif;
   font-weight: normal;
   font-style: normal;
-  src: url("https://fonts.googleapis.com/css?family=Roboto");
 }
 
-.supersonic-navbar-mock {
-  background-color: #663399 !important;
-  text-align: center;
-  font-weight: 600;
+*{
+	font-family: 'Arial', Helvetica, sans-serif;
 }
+
+body, .list-group, .item-thumbnail-left, .list-inset{
+	background-image: url(/icons/paper.png) !important;
+}
+
+label.item{
+	background-image: none;
+	background-color: white ;
+}
+
+#upload_form > *{
+	background-image: none;
+	color: green;
+	font-size: 0px;
+}
+
+input[type=submit]{
+      border: 1px solid #bbbbbb
+      height: 38px
+      line-height: 36px
+      font-weight: bold
+      color: #333333
+      font-size: 18px  
+      font-family: Helvetica, Arial, sans-serif
+      background-color: #fff
+      padding: 0
+      width: 180px
+      border-radius: 6px
+      -moz-border-radius: 6px
+      -webkit-border-radius: 6px            
+      background-image: linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -o-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -moz-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -webkit-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -ms-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
+      background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.28, rgb(244,244,244)),color-stop(0.64, rgb(254,254,254)))
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f4f4f4', EndColorStr='#fefefe')"            
+      margin: 0                       
+      cursor: p
+  }
+
+ .error{
+ 	text-align: center;
+ 	margin: 0 auto;
+ }
+
+  .button{
+ 	border-width: 2px;
+ 	border-color: black;
+ 	font-size: 1.5em;
+ }
+
+ .button:active, .button:visited{
+ 	color: white !important;
+ }
+
+ .button-purple{
+ 	background-color: #9a5fdb;
+ 	color: white;
+ }
+
+ .button-purple::active, .button::visited{
+ 	color: white !important;
+ }
+
+
+ .button-white{
+ 	background-color: white;
+ 	color: black;
+ }
+
+/*#logo{
+	background-image: url("/icons/logo.png");
+	margin: 0 auto;
+	display:inline-block;
+	position: absolute;
+	padding: 4%;
+	right: 42%;
+}*/
+
+.header{
+	box-shadow: 2px 2px 2px 2px #efefef;
+	margin-bottom: 5px;
+	padding-bottom: 6px;
+}
+
+#drawer{
+	color: #9a5fdb;
+	margin-left: 5%;
+	display: inline-block;
+	padding: 4%;
+	margin-bottom: 3.75%;
+	width: 50px;
+	height: 50px;
+	font-size: 2em;
+}
+
+
+hr {
+    background-color: #efefef !important;
+    color: #efefef !important;
+    border: solid 1px #efefef !important;
+    height: 2px !important;
+}
+/* */
+
+
 
 .message {
 	padding-top: 15px;
@@ -19,7 +126,6 @@
 .sender {
 	color: #828282;
 	font-size: 24px;
-	font-family: 'Roboto', sans-serif;
 	height: 100%;
 	width: 100%;
 }
@@ -49,13 +155,12 @@
 }
 
 .content {
-	padding: 5%;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 10%;
 }
 
-.alert {
-  background-color: yellow;
-  text-align: center;
-}
 
 #myModal{
 	position: fixed;
@@ -64,6 +169,15 @@
 	right: 0;
 	left: 0;
 }
+
+#myModal2{
+	position: fixed;
+	background-color: grey;
+	top: 25%;
+	right: 0;
+	left: 0;
+}
+
 
 .modal{
 	position: fixed;
@@ -75,13 +189,12 @@
 	height: 20%;
 	padding: 3%;
 	text-align: center;
-	box-shadow: 2px 2px 2px 2px #888888;
 	font-weight: 500;
 	font-size: 1.2em;
 }
 
  .centered{
- 	margin-top: 30%;
+ 	margin-top: 20%;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -92,21 +205,6 @@
 
  .senders-list {
  	padding-bottom: 20px;
- }
-
- #logo{
-  width: 100%;
-  height: 25%;
-  } 
-
- #bottom{
-
- 	width: 100%;
- 	position: fixed;
- 	height: 10%;
- 	bottom: 0px;
- 	z-index: 10000;
-
  }
 
  #right {
@@ -124,3 +222,83 @@
  	left: 0px;
  	z-index: 10000;
  }
+
+ /* CSS FOR LOGIN PAGE */
+
+ .list-h{
+ 	margin-top: 5px;
+ }
+
+.item-input{
+	border-width: 2px;
+ 	border-color: black;
+}
+
+
+ #loginList{
+ 	margin-bottom: 5%;
+ }
+
+ #sign-in{
+ 	margin-bottom: 7%;
+ }
+
+
+.login-buttons{
+	margin-top: 10%;
+}
+
+ .mainLogo{
+ 	margin-top: 20%;
+ 	margin-bottom: 15%;
+ }
+
+ #tl{
+ 	display: block;
+ 	width: 100%;
+ }
+
+ label.item{
+ 	border-width: 2px;
+ 	border-color: black;
+ }
+
+
+
+ /* */
+
+
+/* INDEX PAGE */
+
+.sender{
+	color: black;
+}
+
+.sender-name{
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+ #bottom{
+
+ 	width: 100%;
+ 	position: fixed;
+ 	height: 10%;
+ 	bottom: -8px;
+ 	z-index: 10000;
+ 	color: white;
+
+ }
+
+ .item-thumbnail-left{
+ 	border: none;
+ }
+
+ #status{
+ 	display: none;
+ }
+
+
+
+
+

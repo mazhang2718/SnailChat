@@ -1,45 +1,43 @@
 <div ng-controller="LoginController">
 
+<body>
 	<div class="content">
 
-		<div class="centered">
-
-			<div class="mainLogo">
-		  		<img id="logo" src="/icons/logo.png">
-		  	</div>
-
-		  	<br>
+		<div class="mainLogo">
+	  		<img id="tl" src="/icons/titleLogo.svg"></img>
 	  	</div>
-	  	<div class="list list-inset">
+
+	  	<div class="list" id="loginList">
+  			<p class="list-h"> Username </p>
   			<label class="item item-input">
-    			<input type="text" placeholder="Username" ng-model="user">
+    			<input type="text" placeholder="" ng-model="user">
   			</label>
+  			<p class="list-h"> Password </p>
 		  <label class="item item-input">
-		    <input type="password" placeholder="Password" ng-model="pass">
+		    <input type="text" placeholder="" ng-model="pass">
 		  </label>
 		</div>
 
+		<div class="login-buttons">
 
-		<button class="item button button-block button-royal" ng-click="auth()">
-			Login
-		</button>
+			<button class="button button-block button-purple" id="sign-in" ng-click="auth()">
+				Sign in
+			</button>
 
-		<super-navigate location="Feed#register">
-		<button class="item button button-block button-royal" location="Feed#register">
-			Register
-		</button>
-		</super-navigate>
+			<super-navigate location="Feed#register">
+			<button class="button button-block button-white" location="Feed#register">
+				Create your account
+			</button>
+			</super-navigate>
 
-		<!--div>
-			remote:{{ph}}
 		</div>
-		<div>
-			local:{{pph}}
-		</div-->
-		<div>
+
+		<div class="error">
 			{{cond}}
 		</div>
 
 	</div>
+
+	</body>
 
 </div>

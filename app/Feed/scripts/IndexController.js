@@ -68,7 +68,7 @@ angular
           }
           else {
             if ($scope.icons[sender_name] == null) {
-              $scope.icons[sender_name] = '/icons/email_open.svg';
+              $scope.icons[sender_name] = '/icons/opened.svg';
             }
           }
           for (var i in toRemove){
@@ -141,7 +141,7 @@ angular
         for (var message in messages) {
           message = messages[message];
           if (message['read'] === 0 && message['delivered'] == 1) {
-            $scope.icons[sender] = '/icons/email.svg';
+            $scope.icons[sender] = '/icons/not_opened.svg';
             deliveredMessages += 1;
             return;
           }
@@ -149,7 +149,7 @@ angular
             pendingMessages += 1;
           }
         }
-        $scope.icons[sender] = '/icons/email_open.svg';
+        $scope.icons[sender] = '/icons/opened.svg';
       });
 
 
@@ -224,11 +224,13 @@ angular
                 msg = allUsers[user][msgs[j]];
                 if (msg['delivered'] == 1 && msg['read'] == 0 && showModals) {
                   $scope.modalMessage = "New messages have been delivered for you!";
+                  $("#status").hide();
                   $("#myModal").modal();
                   return;
                 }
                 else if (msg['delivered'] == 0 && msg['read'] == 0 && showModals){
                   $scope.modalMessage = "New messages are being sent to you!";
+                  $("#status").show();
                   $("#myModal").modal();
                   return;
                 }
@@ -249,10 +251,12 @@ angular
       }
       else if ($scope.pending == true){
         $scope.alertMessage = "New messages are being sent to you!";
+        $("#status").show();
         pendingMessages = 0;
       }
-      else{
-        $scope.alertMessage = "No new updates ):"
+
+      if ($scope.pending != true){
+        $("#status").hide();
       }
 
     }
@@ -286,13 +290,13 @@ angular
     getSenders();
     updateMailIcons();
 
-       $timeout(function() {
+    $timeout(function() {
        showModals = true;
-    }, 2000);
+    }, 3000);
 
     updateModals();
 
-    $interval(getSenders, 15000);
+    $interval(getSenders, 10000);
     $interval(updateMailIcons, 5000);
     $interval(updateTest, 1000);
     //$interval(updateTime, 1000);

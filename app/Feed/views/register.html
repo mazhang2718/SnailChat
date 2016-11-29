@@ -1,5 +1,9 @@
 <div ng-controller="RegisterController">
 
+	<super-navbar id ="logoIndex"></super-navbar>
+
+	<br>
+	
 	<div class="content">
 
 
@@ -10,7 +14,7 @@
 	  	  	<br>
 
   			<label class="item item-input">
-    			<input type="text" placeholder="Username" ng-model="newUser">
+    			<input type="text" placeholder="" ng-model="newUser">
   			</label>
 
   			<br>
@@ -20,7 +24,7 @@
   			  <br>
 
 		  <label class="item item-input">
-		    <input type="password" placeholder="Password" ng-model="newPass">
+		    <input type="password" placeholder="" ng-model="newPass">
 		  </label>
 
 		  <br>
@@ -30,14 +34,14 @@
   			  <br>
 
 		  <label class="item item-input">
-		    <input type="password" placeholder="Retype Password" ng-model="newPass2">
+		    <input type="password" placeholder="" ng-model="newPass2">
 		  </label>
 
 		</div>
 
 		<br>
 
-		<button class="item button button-block button-royal" ng-click="createAccount()">
+		<button class="item button button-block button-purple" ng-click="createAccount()">
 			Register
 		</button>
 
