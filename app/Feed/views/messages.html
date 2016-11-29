@@ -23,7 +23,11 @@
   <div class="caption-subdued">
     Sent: {{messages[curr]['timestamp'] | date:'MMM. d,  h:mm a'}}<br>Delivered: {{messages[curr]['timestampFuture'] | date:'MMM. d,  h:mm a'}}
   </div>
-  <br>
-  <br>
+
+  <super-navigate location="Feed#post?id={{sender}}" id="bottom">
+    <button class="item button button-block button-purple">
+      Respond
+    </button>
+  </super-navigate>
 
 </div>

@@ -136,10 +136,12 @@ angular
     }
 
     supersonic.ui.views.current.whenVisible( function(){
-      var clickParams = steroids.view.params.id;
-      var arr = clickParams.split(",");
-      $scope.user = arr[0]
-      $scope.sender = arr[1];
+      if (steroids.view.params.id) {
+        var clickParams = steroids.view.params.id;
+        var arr = clickParams.split(",");
+        $scope.user = arr[0]
+        $scope.sender = arr[1];
+      }
     });
 
     getUserMessages();
