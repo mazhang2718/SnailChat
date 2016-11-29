@@ -302,9 +302,13 @@ hr {
  	width: 100%;
  	position: fixed;
  	height: 9%;
- 	bottom: 0px;
- 	z-index: 0;
+ 	bottom: 1px;
+ 	z-index: 10000;
  	color: white;
+ }
+
+ .bottom-buffer{
+ 	padding-bottom: 45px;
  }
 
  .fixfixed .bottom{

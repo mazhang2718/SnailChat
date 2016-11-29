@@ -1,4 +1,3 @@
-
 angular
   .module('Feed')
   .controller('IndexController', function($scope, $interval, $timeout, supersonic) {
