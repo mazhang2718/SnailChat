@@ -77,6 +77,8 @@ angular
           }
         }
         var newestPost = function(a) {
+
+          //
           var newest = 0;
           var senderMessages = userinfo[a];
           for (var message in senderMessages) {
@@ -90,9 +92,7 @@ angular
           return newestPost(b) - newestPost(a);
         };
 
-        supersonic.logger.log('abt to sort');
         $scope.senders.sort(newerSender);
-        supersonic.logger.log($scope.senders);
       });
     };
 
