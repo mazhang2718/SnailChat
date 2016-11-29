@@ -2,7 +2,6 @@ angular
   .module('Feed')
   .controller('PostController', function($scope, $interval, $timeout, supersonic){
 
-
     var width = window.innerWidth;
    // Lenny's Cloudinary Account
 
@@ -58,11 +57,10 @@ angular
 
     $scope.user = localStorage.getItem('snail_usr');
 
-
-
     $scope.image = '';
 
     $scope.pushData = function() {
+      supersonic.logger.log("???");
 
       var recv_acc = '/users/' + $scope.receiver + '/messages/' + $scope.user;
       var ref = database.ref().child(recv_acc);
@@ -96,6 +94,41 @@ angular
       supersonic.ui.layers.pop();
     }
 
+  if ($scope.user) {
+    $scope.contacts = [];
+    $scope.loadContact = (function() {
+      var ref = "/users/" + $scope.user + "/contacts";
+      database.ref(ref).once('value').then(function (snapshot) {
+        var data = snapshot.val();
+        for (var prop in data) {
+          $scope.contacts.push(data[prop]);
+        }
+      })
 
+    })();
+  }
 
+  $scope.contactVisible = false;
+  $scope.receiver = "";
+
+  $scope.showContacts = function () {
+    $scope.contactVisible = true;
+    supersonic.logger.log("showContacts");
+  }
+  $scope.selectFriend = function(input) {
+    $scope.receiver = input;
+    $scope.contactVisible = false;
+    supersonic.logger.log("selectFriend");
+  }
+
+  supersonic.ui.views.current.whenVisible( function(){
+    if (steroids.view.params.id) {
+      var clickParams = steroids.view.params.id;
+      var arr = clickParams.split(",");
+      $scope.receiver = arr[0]
+    }
   });
+
+
+
+});

@@ -1,5 +1,6 @@
 String.prototype.hashCode = function() {
-  var hash = 0, i, chr, len;
+  var hash = 0;
+  var i, chr, len;
   if (this.length === 0) return hash;
   for (i = 0, len = this.length; i < len; i++) {
     chr   = this.charCodeAt(i);
@@ -11,7 +12,7 @@ String.prototype.hashCode = function() {
 
 angular
   .module('Feed')
-  .controller('LoginController', function($scope, $rootScope, $interval, supersonic) {
+  .controller('LoginController', function($scope, $interval, supersonic) {
     // Controller functionality here
   	// Firebase Setting
 
@@ -40,7 +41,7 @@ angular
 
       //Get password
       database.ref(remote_hash_query).once('value').then(function(snapshot) {
-        
+
         remote_hash = snapshot.val();
         //this isn't actually a secure hash
         var pass_hash = $scope.pass.hashCode();
@@ -56,6 +57,6 @@ angular
       });
 
     }
-    
+
 
   });

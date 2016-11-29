@@ -10,36 +10,45 @@
     <div class="list">
 
 
-          <p class="list-h"> Send to: </p>
+         <!-- Cloudinary Photo Upload-->
+
+
+
+         <!--<div class="progress_bar"></div>-->
+
          <label class="item item-input item-floating-label">
-           <input type="text" placeholder="" ng-model="receiver">
+           <p class="list-h">Send to:</p>
+           <input id="Send" type="text" placeholder="Send to:" ng-model="receiver" ng-focus="showContacts()" ng-change="showContacts()">
+           <div ng-show="contactVisible" id="myDropdown" class="dropdown-content">
+             <li ng-show="contactVisible" ng-click="selectFriend(contact)" class="item col col-75" ng-repeat="contact in contacts | filter:receiver">
+             {{contact}}</li>
+
+           </div>
          </label>
 
-         <br>
-         <!-- Cloudinary Photo Upload-->
+        <form class="upload_form" id ="upload_form"></form>
+
          <div class="preview">
 <!--             <img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" /> -->
          </div>
 
-         <form class="upload_form" id ="upload_form"></form>
-         <!--<div class="progress_bar"></div>-->
-
-          <p class="list-h"> Caption: </p>
          <label class="item item-input item-floating-label">
-           <input type="text" placeholder="" ng-model="caption">
+           <p class="list-h">Caption</p>
+           <!-- <input type="text" placeholder="Caption" ng-model="caption"> -->
+           <textarea ng-model="caption" name="Text1" cols="40" rows="5"></textarea>
          </label>
 
     </div>
-
 </div>
 
-<br>
+<div id="bottom">
 
-    <div id="bottom">
-        <button class="item button button-block button-purple" ng-click="pushData()">
-          Send
+
+        <button class="item button button-block button-royal" ng-click="pushData()">
+          Submit
         </button>
-        </div>
+ </div>
+
 
 
   <div class="modal fade" id="myModal2" role="dialog">
