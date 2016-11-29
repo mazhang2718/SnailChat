@@ -15,7 +15,6 @@ angular
     $scope.user = undefined;
     $scope.delay = undefined;
 
-
     $scope.messages = undefined;
     $scope.test = undefined;
     $scope.senders = undefined;
@@ -60,21 +59,40 @@ angular
         if ($scope.icons == undefined) {
           $scope.icons = {};
         }
-
+        var toRemove = [];
         for (var sender in $scope.senders) {
           sender_name = $scope.senders[sender];
           if (noMatureMessages(userinfo[sender_name])) {
             //Remove user from the list of senders
-            supersonic.logger.log("in the no mature messages: " + sender_name);
-            supersonic.logger.log(sender);
-            $scope.senders.splice(sender, 1);
-            supersonic.logger.log($scope.senders);
+            toRemove.push(sender);
           }
           else {
-            supersonic.logger.log("in the else: " + sender);
-            $scope.icons[$scope.senders[sender]] = '/icons/email_open.svg';
+            if ($scope.icons[sender_name] == null) {
+              $scope.icons[sender_name] = '/icons/email_open.svg';
+            }
+          }
+          for (var i in toRemove){
+            var index = toRemove[i];
+            $scope.senders.splice(index, 1);
           }
         }
+        var newestPost = function(a) {
+          var newest = 0;
+          var senderMessages = userinfo[a];
+          for (var message in senderMessages) {
+            message = senderMessages[message];
+            newest = Math.max(message.timestampFuture, newest);
+          }
+          return newest;
+        };
+
+        var newerSender = function(a,b) {
+          return newestPost(b) - newestPost(a);
+        };
+
+        supersonic.logger.log('abt to sort');
+        $scope.senders.sort(newerSender);
+        supersonic.logger.log($scope.senders);
       });
     };
 
@@ -86,7 +104,6 @@ angular
           return false;
         }
       }
-      supersonic.logger.log('hitting the true case');
       return true;
     };
 
