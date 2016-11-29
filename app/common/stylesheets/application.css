@@ -297,15 +297,18 @@ hr {
 	padding-left: 20px;
 }
 
- #bottom{
+ .bottom{
 
  	width: 100%;
  	position: fixed;
- 	height: 10%;
+ 	height: 9%;
  	bottom: 0px;
- 	z-index: 10000;
+ 	z-index: 0;
  	color: white;
+ }
 
+ .fixfixed .bottom{
+ 	position: absolute;
  }
 
  .item-thumbnail-left{

@@ -15,10 +15,9 @@
 
 
          <!--<div class="progress_bar"></div>-->
-
-         <label class="item item-input item-floating-label">
            <p class="list-h">Send to:</p>
-           <input id="Send" type="text" placeholder="Send to:" ng-model="receiver" ng-focus="showContacts()" ng-change="showContacts()">
+         <label class="item item-input item-floating-label">
+           <input id="Send" type="text" placeholder="" ng-model="receiver" ng-focus="showContacts()" ng-change="showContacts()">
            <div ng-show="contactVisible" id="myDropdown" class="dropdown-content">
              <li ng-show="contactVisible" ng-click="selectFriend(contact)" class="item col col-75" ng-repeat="contact in contacts | filter:receiver">
              {{contact}}</li>
@@ -32,8 +31,8 @@
 <!--             <img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" /> -->
          </div>
 
-         <label class="item item-input item-floating-label">
            <p class="list-h">Caption</p>
+         <label class="item item-input item-floating-label">
            <!-- <input type="text" placeholder="Caption" ng-model="caption"> -->
            <textarea ng-model="caption" name="Text1" cols="40" rows="5"></textarea>
          </label>
@@ -41,10 +40,10 @@
     </div>
 </div>
 
-<div id="bottom">
+<div class="bottom">
 
 
-        <button class="item button button-block button-royal" ng-click="pushData()">
+        <button class="item button button-block button-purple" ng-click="pushData()">
           Submit
         </button>
  </div>
@@ -73,4 +72,30 @@
 
 
 </body>
+
+<script>
+
+  if ('ontouchstart' in window) {
+    /* cache dom references */ 
+    var $body = $('body'); 
+
+    /* bind events */
+    $(document)
+    .on('focus', 'input', function() {
+        $body.addClass('fixfixed');
+    })
+    .on('blur', 'input', function() {
+        $body.removeClass('fixfixed');
+    });
+
+        $(document)
+    .on('focus', 'textarea', function() {
+        $body.addClass('fixfixed');
+    })
+    .on('blur', 'textarea', function() {
+        $body.removeClass('fixfixed');
+    });
+}
+
+</script>
 </div>
