@@ -124,3 +124,19 @@
  	left: 0px;
  	z-index: 10000;
  }
+
+ .post-contain {
+ 	position: relative;
+ }
+
+ .overlay-image-left {
+ 	position: absolute;
+ 	bottom: 0px;
+ 	left: 0px;
+ }
+
+ .overlay-image-right {
+ 	position: absolute;
+ 	bottom: 0px;
+ 	right: 0px;
+ }

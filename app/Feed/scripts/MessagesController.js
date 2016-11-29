@@ -49,6 +49,8 @@ angular
     $scope.tester = undefined;
     $scope.curr = 0;
     $scope.messageLength = 0;
+    $scope.bottom_left = '/icons/corner_missing.png';
+    $scope.bottom_right = '/icons/corner_missing.png';
 
     var getUserMessages = function() {
 
@@ -73,6 +75,8 @@ angular
           }
         }
         database.ref().update(updates);
+
+        updateCorners();
       });
 
     };
@@ -81,12 +85,16 @@ angular
       $scope.curr = $scope.curr + 1;
       if ($scope.curr > $scope.messageLength - 1)
         {$scope.curr = $scope.messageLength - 1;}
+
+      updateCorners();
     }
 
     $scope.goLeft = function() {
       $scope.curr = $scope.curr - 1;
       if ($scope.curr < 0)
         {$scope.curr = 0;}
+
+      updateCorners();
     }
 
     var updateTest = function(){
@@ -102,6 +110,31 @@ angular
       }
     }
 
+    var updateCorners = function(){
+      //Handle single message
+      if ($scope.messageLength <= 1) {
+        $scope.bottom_left = '/icons/corner_missing.png';
+        $scope.bottom_right = '/icons/corner_missing.png';
+      }
+      else {
+        //Handle first message
+        if ($scope.curr == 0) {
+          $scope.bottom_left = '/icons/corner_missing.png';
+          $scope.bottom_right = '/icons/corner_flipped.png';
+        }
+        //Middle messages
+        else if ($scope.curr < $scope.messageLength-1) {
+          $scope.bottom_left = '/icons/corner.png';
+          $scope.bottom_right = '/icons/corner_flipped.png';
+        }
+        //Last message
+        else {
+          $scope.bottom_left = '/icons/corner.png';
+          $scope.bottom_right = '/icons/corner_missing.png';
+        }
+      }
+    }
+
     supersonic.ui.views.current.whenVisible( function(){
       var clickParams = steroids.view.params.id;
       var arr = clickParams.split(",");
@@ -110,7 +143,6 @@ angular
     });
 
     getUserMessages();
-
 
 
     $interval(getUserMessages, 15000);

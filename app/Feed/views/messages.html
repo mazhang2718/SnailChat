@@ -11,8 +11,10 @@
   <div class="info text-center">
     <h2>{{sender}}</h2>
   </div>
-  <div>
-    <img class="full-image" ng-src={{messages[curr]['image']}} width="100%" height="100%">
+  <div class="post-contain">
+    <img ng-src={{messages[curr]['image']}} width="100%" height="100%">
+    <img class="overlay-image-left" ng-src={{bottom_left}} width="11%" height="auto">
+    <img class="overlay-image-right" ng-src={{bottom_right}} width="11%" height="auto">
   </div>
   <div class="caption">
       {{messages[curr]['message']}}
