@@ -4,20 +4,25 @@
  ***********************************************************/
 
 navigation-bar {
-  background-color: #663399;
-  color: #ffffff;
-  padding-left: 6px;
-  padding-right: 6px;
+  color: #9a5fdb;
+  margin-bottom:2px;
+  border-bottom: 2px black;
+}
+
+navigation-bar#logoIndex {
+  background-image: url(/icons/logo3.png);
+  background-color: white;
+  border: 2px black;
 }
 
 navigation-bar title {
-  color: #ffffff;
+  color: #9a5fdb;
   font-size: 18px;
   font-weight: 600;
 }
 
 navigation-bar button {
-  color: #ffffff;
+  color: #9a5fdb;
   font-weight: 300;
   margin-left: 6px;
   margin-right: 6px;
@@ -29,7 +34,7 @@ navigation-bar back-indicator {
 }
 
 navigation-bar back-button {
-  color: #ffffff;
+  color: #9a5fdb;
   font-weight: 300;
 }
 

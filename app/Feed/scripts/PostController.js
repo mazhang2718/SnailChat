@@ -60,7 +60,7 @@ angular
 
 
 
-    $scope.image = 'http://images.hellogiggles.com/uploads/2015/03/08/purple-suede.jpg';
+    $scope.image = '#';
 
     $scope.pushData = function() {
 
@@ -88,6 +88,11 @@ angular
 
       $(".preview").empty();
 
+      $("#myModal2").modal();
+
+    }
+
+    $scope.dismiss = function(){
       supersonic.ui.layers.pop();
     }
 

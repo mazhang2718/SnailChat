@@ -1,31 +1,67 @@
 <div ng-controller="PostController">
 
+  <super-navbar>
+  </super-navbar>
 
+<body>
+
+<div class="content">
 <!-- posting form code -->
-  <div class="form">
     <div class="list">
 
+
+          <p class="list-h"> Send to: </p>
+         <label class="item item-input item-floating-label">
+           <input type="text" placeholder="" ng-model="receiver">
+         </label>
+
+         <br>
          <!-- Cloudinary Photo Upload-->
          <div class="preview">
-            <img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" />
-         </div> <br />
+<!--             <img id="placeholder" height="300" width="100%" src="http://ingridwu.dmmdmcfatter.com/wp-content/uploads/2015/01/placeholder.png" /> -->
+         </div>
 
-         <form class="upload_form"></form>
-         <div class="progress_bar"></div>
+         <form class="upload_form" id ="upload_form"></form>
+         <!--<div class="progress_bar"></div>-->
 
+          <p class="list-h"> Caption: </p>
          <label class="item item-input item-floating-label">
-           <span class="input-label">Send to:</span>
-           <input type="text" placeholder="Send to:" ng-model="receiver">
+           <input type="text" placeholder="" ng-model="caption">
          </label>
 
-         <label class="item item-input item-floating-label">
-           <span class="input-label">Caption</span>
-           <input type="text" placeholder="Caption" ng-model="caption">
-         </label>
-        <button class="item button button-block button-royal" ng-click="pushData()">
-          Submit
+    </div>
+
+</div>
+
+<br>
+
+    <div id="bottom">
+        <button class="item button button-block button-purple" ng-click="pushData()">
+          Send
         </button>
+        </div>
+
+
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">SnailPost</h4>
+        </div>
+        <div class="modal-body">
+          <p>Your message has been sent!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="dismiss()" data-dismiss="modal">Return</button>
+        </div>
+      </div>
+      
     </div>
   </div>
 
+
+</body>
 </div>
