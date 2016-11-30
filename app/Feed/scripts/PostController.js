@@ -31,7 +31,8 @@ angular
     }))
 
     .bind("cloudinarydone", function(e, data) {
-      $(".preview").append("<div id=" + data.result.public_id + "></div>");
+      $(".prevImage").remove();
+      $(".preview").append("<div class='prevImage' id=" + data.result.public_id + "></div>");
       $("#" + data.result.public_id).append($.cloudinary.image(data.result.public_id, {
           format: data.result.format,
           version: data.result.version,
