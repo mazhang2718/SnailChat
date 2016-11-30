@@ -288,7 +288,7 @@ hr {
 #mailIcon {
   width: 100px;
   height: auto;
-  object-fit: cover;
+  /*object-fit: cover;*/
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
