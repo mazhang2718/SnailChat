@@ -78,12 +78,14 @@ angular
         }
         var newestPost = function(a) {
 
-          //
           var newest = 0;
           var senderMessages = userinfo[a];
           for (var message in senderMessages) {
             message = senderMessages[message];
-            newest = Math.max(message.timestampFuture, newest);
+            if (message.timestampFuture <= Date.now() ||
+                $scope.tester == 'True') {
+              newest = Math.max(message.timestampFuture, newest);
+            }
           }
           return newest;
         };
@@ -100,7 +102,8 @@ angular
       for (var message in messages) {
         message = messages[message];
 
-        if (message.timestampFuture <= Date.now()) {
+        if (message.timestampFuture <= Date.now() ||
+            $scope.tester == 'True') {
           return false;
         }
       }
