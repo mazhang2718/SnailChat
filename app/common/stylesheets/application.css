@@ -298,7 +298,7 @@ hr {
 }
 
  .bottom{
-
+ 	display: block;
  	width: 100%;
  	position: fixed;
  	height: 9%;
@@ -312,7 +312,10 @@ hr {
  }
 
  .fixfixed .bottom{
+ 	display: none;
+ 	z-index: 0;
  	position: absolute;
+ 	bottom: -100px;
  }
 
  .item-thumbnail-left{
