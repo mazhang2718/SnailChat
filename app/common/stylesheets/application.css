@@ -32,22 +32,22 @@ input[type=submit]{
       line-height: 36px
       font-weight: bold
       color: #333333
-      font-size: 18px  
+      font-size: 18px
       font-family: Helvetica, Arial, sans-serif
       background-color: #fff
       padding: 0
       width: 180px
       border-radius: 6px
       -moz-border-radius: 6px
-      -webkit-border-radius: 6px            
+      -webkit-border-radius: 6px
       background-image: linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
       background-image: -o-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
       background-image: -moz-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
       background-image: -webkit-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
       background-image: -ms-linear-gradient(bottom, rgb(244,244,244) 28%, rgb(254,254,254) 64%)
       background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.28, rgb(244,244,244)),color-stop(0.64, rgb(254,254,254)))
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f4f4f4', EndColorStr='#fefefe')"            
-      margin: 0                       
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f4f4f4', EndColorStr='#fefefe')"
+      margin: 0
       cursor: p
   }
 
@@ -201,7 +201,7 @@ hr {
    justify-content: center;
    width: 100%;
    height: 100%;
- 
+
  }
 
  .senders-list {
@@ -240,7 +240,7 @@ hr {
  	bottom: 0px;
  	right: 0px;
  }
- 
+
  /* CSS FOR LOGIN PAGE */
 
  .list-h{
@@ -283,7 +283,18 @@ hr {
 
 
 
- /* */
+ /* MAIL ICONS */
+
+#mailIcon {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+}
+
 
 
 /* INDEX PAGE */

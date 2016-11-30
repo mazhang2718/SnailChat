@@ -21,7 +21,7 @@
 
   <div class='list-group senders-list'>
     <div class="item item-thumbnail-left" id="status">
-        <img src="/icons/email_transit.png">
+        <img id="emailTransit" src="/icons/email_transit.png">
         <div class="row sender">
           <div class="col sender-name">
             SnailPost in transit!
@@ -30,7 +30,7 @@
     </div>
     <div ng-repeat="sender in senders">
       <super-navigate location="Feed#messages?id={{user}},{{sender}},{{delay}}" class="item item-thumbnail-left">
-        <img ng-src={{icons[sender]}}>
+        <img id="mailIcon" ng-src={{icons[sender]}}>
         <div class="row sender">
           <div class="col sender-name">
             {{sender}}
