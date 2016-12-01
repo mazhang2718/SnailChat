@@ -58,7 +58,7 @@ angular
 
     $scope.user = localStorage.getItem('snail_usr');
 
-    $scope.image = '';
+    $scope.image = 'https://s15.postimg.org/4il31c7cr/fill_in.png';
 
     $scope.pushData = function() {
       supersonic.logger.log("???");

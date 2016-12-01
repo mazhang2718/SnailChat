@@ -231,13 +231,13 @@ hr {
 
  .overlay-image-left {
  	position: absolute;
- 	bottom: 0px;
+ 	top: 0px;
  	left: 0px;
  }
 
  .overlay-image-right {
  	position: absolute;
- 	bottom: 0px;
+ 	top: 0px;
  	right: 0px;
  }
 
