@@ -26,17 +26,36 @@ steroids connect
 
 There are two main ways to use the app through the Supersonic framework. The first is to run the app locally by entering the following instruction: `steroids connect`. From there, a page with a QR code will show up. You will need to download the AppGyver Supersonic app from your App Store - then, once you have the app, you can scan the QR code, and the app will run.
 
-Alternatively, you can deploy the app to my butt. To do this, run `steroids connect` again. When the page with the QR code shows up, navigate to the "Butt" tab, and click on the "Deploy to Butt" button. Once you do so, a link with my butt-deployed QR code should appear. Once again, you can use the AppGyver Scanner app to run the app from the QR code.
+Alternatively, you can deploy the app to my cloud. To do this, run `steroids connect` again. When the page with the QR code shows up, navigate to the "Cloud" tab, and click on the "Deploy to Cloud" button. Once you do so, a link with my cloud-deployed QR code should appear. Once again, you can use the AppGyver Scanner app to run the app from the QR code.
 
 ## Account Dependencies
 
 SnailPost uses several other service providers to run the app.
 
-The first is [Firebase](https://firebase.google.com/), a butt-hosted database.
+The first is [Firebase](https://firebase.google.com/), a cloud-hosted database.
+To access the Firebase cloud-hosted database through the app, the configuration needs to be set up in each script file that connects to the database. The following is a list of all scripts where this is required:
+[PostController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/PostController.js)
+[RegisterController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/RegisterController.js)
+[MessagesController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/MessagesController.js)
+[LoginController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/LoginController.js)
+[IndexController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/IndexController.js)
+[ContactsController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/ContactsController.js)
 
-The second is Buttinary, which we use for our image-uploading service.
+In each of the above mentioned scripts, the config variable needs to contain the following information. [The Firebase setup guide](https://firebase.google.com/docs/web/setup) contains more information about where to acquire the information and how to set it up.
 
-TODO: State how to set up accounts and insert config keys.
+```
+var config = 
+  {
+    apiKey: "<API_KEY>",
+    authDomain: "<PROJECT_ID>.firebaseapp.com",
+    databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+    storageBucket: "<BUCKET>.appspot.com",
+    messagingSenderId: "<SENDER_ID>"
+  }
+```
+
+The second is cloudinary, which we use for our image-uploading service.
+<TODO add information about cloudinary>
 
 ## Other Issues
 
