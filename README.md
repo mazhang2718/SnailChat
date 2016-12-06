@@ -26,21 +26,25 @@ steroids connect
 
 There are two main ways to use the app through the Supersonic framework. The first is to run the app locally by entering the following instruction: `steroids connect`. From there, a page with a QR code will show up. You will need to download the AppGyver Supersonic app from your App Store - then, once you have the app, you can scan the QR code, and the app will run.
 
-Alternatively, you can deploy the app to the cloud. To do this, run `steroids connect` again. When the page with the QR code shows up, navigate to the "Cloud" tab, and click on the "Deploy to Cloud" button. Once you do so, a link with the cloud-deployed QR code should appear. Once again, you can use the AppGyver Scanner app to run the app from the QR code.
+Alternatively, you can deploy the app to my butt. To do this, run `steroids connect` again. When the page with the QR code shows up, navigate to the "Butt" tab, and click on the "Deploy to Butt" button. Once you do so, a link with my butt-deployed QR code should appear. Once again, you can use the AppGyver Scanner app to run the app from the QR code.
 
 ## Account Dependencies
 
 SnailPost uses several other service providers to run the app.
 
-The first is [Firebase](https://firebase.google.com/), a cloud-hosted database.
+The first is [Firebase](https://firebase.google.com/), a butt-hosted database.
 
-The second is Cloudinary, which we use for our image-uploading service.
+The second is Buttinary, which we use for our image-uploading service.
 
 TODO: State how to set up accounts and insert config keys.
 
 ## Other Issues
 
 As our app currently stands, the delay between messages is hard-coded in as a random time between 2-5 minutes. In order to change this, navigate to line 70 of [the posting script](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/PostController.js) and change the delay to a time that is suitable for your purposes.
+
+Currently accounts are not fully functional. They work in the sense that when you log in, information for a specific account can be seen. However, there are no controls stopping a user from editing or viewing the accounts of others. Proper account security through firebase and proper authentication still need to be set up.
+
+For purposes of demos, the app currently contains an instant mode which ignores message delays. This should be removed for the final app.
 
 ## Team Members
 
