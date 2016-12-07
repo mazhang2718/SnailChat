@@ -3,26 +3,31 @@ angular
   .controller('PostController', function($scope, $interval, $timeout, supersonic){
 
     var width = window.innerWidth;
-   // Lenny's Cloudinary Account
 
-    var config = {
-      apiKey: "AIzaSyDAuhBy07kgbtxrkWjHu76bS7-Rvsr2Oo8",
-      authDomain: "purple-b06c8.firebaseapp.com",
-      databaseURL: "https://purple-b06c8.firebaseio.com",
-      storageBucket: "purple-b06c8.appspot.com",
-      messagingSenderId: "396973912921"
-    };
+    // Set up database
+    /*
+    var config =
+      {
+        apiKey: "<API_KEY>",
+        authDomain: "<PROJECT_ID>.firebaseapp.com",
+        databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+        storageBucket: "<BUCKET>.appspot.com",
+        messagingSenderId: "<SENDER_ID>"
+      }
+    */
 
 
     firebase.initializeApp(config);
     var database = firebase.database();
     $scope.publicIds = [];
 
+    // Cloudinary Setting
+
     $.cloudinary.config({
       cloud_name: "daxutqqyt"
     });
 
-    // For Android
+    // For compatibility on Android
     $(".cloudinary_fileupload").attr("accept", "image/*;capture=camera");
 
     $('.upload_form').append($.cloudinary.unsigned_upload_tag("mmbawtto", {
@@ -30,6 +35,7 @@ angular
       tags: "browser_uploads"
     }))
 
+    // After photo is uploaded, callbacks follow to show images (+ progress bar if wished)
     .bind("cloudinarydone", function(e, data) {
       $(".prevImage").remove();
       $(".preview").append("<div class='prevImage' id=" + data.result.public_id + "></div>");
@@ -55,6 +61,7 @@ angular
       $(".progress_bar").css("width",
         Math.round((data.loaded * 100.0) / data.total) + "%");
     });
+
 
     $scope.user = localStorage.getItem('snail_usr');
 

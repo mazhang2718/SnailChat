@@ -2,15 +2,18 @@ angular
   .module('Feed')
   .controller('IndexController', function($scope, $interval, $timeout, supersonic) {
     // Controller functionality here
-    // Firebase Setting
-    var config = {
-      apiKey: "AIzaSyDAuhBy07kgbtxrkWjHu76bS7-Rvsr2Oo8",
-      authDomain: "purple-b06c8.firebaseapp.com",
-      databaseURL: "https://purple-b06c8.firebaseio.com",
-      storageBucket: "purple-b06c8.appspot.com",
-      messagingSenderId: "396973912921"
-    };
 
+    // Set up database
+    /*
+    var config =
+      {
+        apiKey: "<API_KEY>",
+        authDomain: "<PROJECT_ID>.firebaseapp.com",
+        databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+        storageBucket: "<BUCKET>.appspot.com",
+        messagingSenderId: "<SENDER_ID>"
+      }
+    */
 
     $scope.user = undefined;
     $scope.delay = undefined;

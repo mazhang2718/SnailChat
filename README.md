@@ -33,18 +33,18 @@ Alternatively, you can deploy the app to my cloud. To do this, run `steroids con
 SnailPost uses several other service providers to run the app.
 
 The first is [Firebase](https://firebase.google.com/), a cloud-hosted database.
-To access the Firebase cloud-hosted database through the app, the configuration needs to be set up in each script file that connects to the database. The following is a list of all scripts where this is required:  
-[PostController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/PostController.js)  
-[RegisterController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/RegisterController.js)  
-[MessagesController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/MessagesController.js)  
-[LoginController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/LoginController.js)  
-[IndexController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/IndexController.js)  
+To access the Firebase cloud-hosted database through the app, the configuration needs to be set up in each script file that connects to the database. The following is a list of all scripts where this is required:
+[PostController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/PostController.js)
+[RegisterController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/RegisterController.js)
+[MessagesController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/MessagesController.js)
+[LoginController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/LoginController.js)
+[IndexController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/IndexController.js)
 [ContactsController.js](https://github.com/eecs394-f16/SnailChat/blob/master/app/Feed/scripts/ContactsController.js)
 
 In each of the above mentioned scripts, the config variable needs to contain the following information. [The Firebase setup guide](https://firebase.google.com/docs/web/setup) contains more information about where to acquire the information and how to set it up.
 
 ```
-var config = 
+var config =
   {
     apiKey: "<API_KEY>",
     authDomain: "<PROJECT_ID>.firebaseapp.com",
@@ -54,7 +54,22 @@ var config =
   }
 ```
 
-The second is cloudinary, which we use for our image-uploading service.
+The second is cloudinary, which we use for our image-uploading service. You have to sign up at Cloudinary to enable photo uploading. For more information, please visit http://cloudinary.com/blog/direct_upload_made_easy_from_browser_or_mobile_app_to_the_cloud
+
+```
+$.cloudinary.config({
+  cloud_name: <CLOUD_NAME>
+});
+
+
+$('.upload_form').append($.cloudinary.unsigned_upload_tag(<UPLOAD_PRESET_NAME>, {
+  cloud_name: <CLOUD_NAME>,
+  tags: "browser_uploads"
+}));
+
+$scope.image = "http://res.cloudinary.com/<CLOUD_NAME>/image/upload/v1478125497/"
+```
+
 <TODO add information about cloudinary>
 
 ## Other Issues

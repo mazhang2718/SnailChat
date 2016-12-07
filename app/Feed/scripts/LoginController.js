@@ -14,19 +14,22 @@ angular
   .module('Feed')
   .controller('LoginController', function($scope, $interval, supersonic) {
     // Controller functionality here
-  	// Firebase Setting
 
     $scope.user = undefined;
     $scope.pass = undefined;
     $scope.cond = undefined;
 
-    var config = {
-      apiKey: "AIzaSyDAuhBy07kgbtxrkWjHu76bS7-Rvsr2Oo8",
-      authDomain: "purple-b06c8.firebaseapp.com",
-      databaseURL: "https://purple-b06c8.firebaseio.com",
-      storageBucket: "purple-b06c8.appspot.com",
-      messagingSenderId: "396973912921"
-    };
+    // Set up database
+    /*
+    var config =
+      {
+        apiKey: "<API_KEY>",
+        authDomain: "<PROJECT_ID>.firebaseapp.com",
+        databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+        storageBucket: "<BUCKET>.appspot.com",
+        messagingSenderId: "<SENDER_ID>"
+      }
+    */
 
     firebase.initializeApp(config);
     var database = firebase.database();
