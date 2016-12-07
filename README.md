@@ -54,7 +54,7 @@ var config =
   }
 ```
 
-The second is cloudinary, which we use for our image-uploading service. You have to sign up at Cloudinary to enable photo uploading. For more information, please visit http://cloudinary.com/blog/direct_upload_made_easy_from_browser_or_mobile_app_to_the_cloud
+The second is Cloudinary (http://cloudinary.com/), which we use for our image-uploading service. You have to sign up at Cloudinary to enable photo uploading. After signing up, you should be able to see the cloud name and enable unsigned uploading (or anything else preferred) under Settings > Upload > Upload presets. For more information, please visit http://cloudinary.com/blog/direct_upload_made_easy_from_browser_or_mobile_app_to_the_cloud
 
 ```
 $.cloudinary.config({
