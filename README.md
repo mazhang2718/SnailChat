@@ -2,6 +2,12 @@
 
 SnailPost is a mobile communication app designed to bring back the sense of slow, thoughtful satisfaction of snail mail, in an era where most communication is built upon instant gratification. Using this app, you are able to send images and captions to your friends and contacts, which will be delivered to them after a certain delay.
 
+## Basic UI
+
+![](https://github.com/mazhang2718/SnailChat/blob/master/Screen%20Shot%202017-07-16%20at%2012.31.30%20AM.png)
+
+![](https://github.com/mazhang2718/SnailChat/blob/master/Screen%20Shot%202017-07-16%20at%2012.31.38%20AM.png)
+
 ## Project Setup
 
 SnailPost is primarily built upon AppGyver Supersonic, which is a hybrid web-mobile framework. In order to use this app, you should first follow the instructions on the [AppGyver website](http://www.appgyver.io/steroids/getting_started) to install the Steroids Command-Line interface, as well as set up an account. Once you have done so, you can run the following instructions in the Terminal to get the project up and running:
